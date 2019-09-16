@@ -7,6 +7,7 @@ KERNEL_DEFCONFIG = "adlink-px30_config"
 SRC_URI += " \
 	file://adlink-px30_config \
 	file://0001-Device-tree-for-LEC-PX30.patch \
+	file://0002-Added-ethernet-driver-support.patch \
 "		
 
 do_copy_defconfig() {
