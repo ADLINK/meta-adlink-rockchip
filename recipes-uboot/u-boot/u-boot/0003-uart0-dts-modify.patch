@@ -1,0 +1,86 @@
+From d1f8527f46ef3a422e7d4ac3c27bc541e7c0eb12 Mon Sep 17 00:00:00 2001
+From: liming <lm@lanxus.com>
+Date: Thu, 9 May 2019 13:13:24 +0800
+Subject: [PATCH 3/3] uart0 dts modify
+
+Change-Id: Idcb91ca2470472d979e4e97daab153733cb0cf78
+---
+ arch/arm/dts/px30-evb.dts      |  9 ++++++++-
+ arch/arm/dts/px30-u-boot.dtsi  | 14 ++++++++++++--
+ arch/arm/mach-rockchip/board.c |  2 +-
+ 3 files changed, 21 insertions(+), 4 deletions(-)
+
+diff --git a/arch/arm/dts/px30-evb.dts b/arch/arm/dts/px30-evb.dts
+index 491013b..38e9742 100644
+--- a/arch/arm/dts/px30-evb.dts
++++ b/arch/arm/dts/px30-evb.dts
+@@ -421,8 +421,15 @@
+ 	status = "okay";
+ };
+ 
++&uart0 {
++	 u-boot,dm-pre-reloc;
++	 pinctrl-names = "default";
++         pinctrl-0 = <&uart0_xfer>;
++	 status = "okay";
++};
++
+ &uart2 {
+-	status = "okay";
++	status = "disabled";
+ };
+ 
+ &pinctrl {
+diff --git a/arch/arm/dts/px30-u-boot.dtsi b/arch/arm/dts/px30-u-boot.dtsi
+index ae3e4f9..157e5e2 100644
+--- a/arch/arm/dts/px30-u-boot.dtsi
++++ b/arch/arm/dts/px30-u-boot.dtsi
+@@ -8,10 +8,14 @@
+ 	aliases {
+ 		mmc0 = &emmc;
+ 		mmc1 = &sdmmc;
++		serial0 = &uart0;
++		serial1 = &uart1;
++		serial2 = &uart2;
++		
+ 	};
+ 
+ 	chosen {
+-		stdout-path = &uart2;
++		stdout-path = &uart0;
+ 	};
+ };
+ 
+@@ -21,9 +25,15 @@
+ 
+ &uart2 {
+ 	clock-frequency = <24000000>;
+-	u-boot,dm-pre-reloc;
++	/*u-boot,dm-pre-reloc;*/
++};
++
++&uart0 {
++        clock-frequency = <24000000>;
++        u-boot,dm-pre-reloc;
+ };
+ 
++
+ &nandc0 {
+ 	u-boot,dm-pre-reloc;
+ 	status = "okay";
+diff --git a/arch/arm/mach-rockchip/board.c b/arch/arm/mach-rockchip/board.c
+index 41f4d27..2f2d312 100644
+--- a/arch/arm/mach-rockchip/board.c
++++ b/arch/arm/mach-rockchip/board.c
+@@ -244,7 +244,7 @@ int board_init(void)
+ {
+ 	int ret;
+ //1111111111111111111
+-	//board_debug_uart_init();
++	board_debug_uart_init();
+ 	early_bootrom_download();
+         printf("##############board_init##############\n");
+ #ifdef CONFIG_USING_KERNEL_DTB
+-- 
+1.9.1
+
