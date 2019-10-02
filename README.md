@@ -9,6 +9,7 @@
 | <img src="https://i.imgur.com/0blWdgg.png" width="200"/> | **LEC-PX30** ([More details](https://www.adlinktech.com/Products/Computer_on_Modules/SMARC/LEC-PX30?lang=en"))  <br />     SMARC Short Size Module with Rockchip PX30 Quad-Core ARM Cortex A35<br /> |
 
 <br>
+
 ### Dowload a Live OS image for quick evaluation:
 <ul>
 <li>
@@ -17,6 +18,7 @@ LEC-PX30 with IPi-SMARC Image (without Desktop Environment)" &nbsp; &nbsp; &nbsp
 </ul>
 
 <br>
+
 ### Please refer to [User Guide](https://github.com/ADLINK/meta-adlink-rockchip/wiki) for Yocto BSP building
  
 <br>
