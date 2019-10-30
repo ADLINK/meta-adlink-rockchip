@@ -21,6 +21,8 @@ LEC-PX30 with IPi-SMARC Image (without Desktop Environment) &nbsp; &nbsp; &nbsp;
  </li>
 </ul>
 
+**Note:** login name: root / No password required.
+
 <br>
 
 ### Please refer to [User Guide](https://github.com/ADLINK/meta-adlink-rockchip/wiki) for Yocto BSP building
