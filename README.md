@@ -21,7 +21,7 @@ LEC-PX30 with IPi-SMARC Image (without Desktop Environment) &nbsp; &nbsp; &nbsp;
  </li>
 </ul>
 
-**Note:** login name: root / No password required.
+**Note:** login name: root / no password required.
 
 <br>
 
