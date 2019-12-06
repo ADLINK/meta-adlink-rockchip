@@ -1,13 +1,13 @@
-From 273d597b9cb587bd0d9497fe0909c4e7709c2557 Mon Sep 17 00:00:00 2001
+From c8727b46d5d664e831fa8c625f33cec4d795228e Mon Sep 17 00:00:00 2001
 From: Dineshkumar V <dineshkumar.varadarajan@adlinktech.com>
-Date: Fri, 15 Nov 2019 18:21:48 +0530
-Subject: [PATCH 4/4] Added LT9611 driver support for LEC-PX30 A2
+Date: Thu, 5 Dec 2019 21:15:38 +0530
+Subject: [PATCH 4/4] Added LT9611 driver support for LEC-PX30-A2
 
 ---
  drivers/gpu/drm/bridge/Kconfig      |   9 +
- drivers/gpu/drm/bridge/Makefile     |   2 +-
- drivers/gpu/drm/bridge/lt9611-i2c.c | 946 ++++++++++++++++++++++++++++++++++++
- 3 files changed, 956 insertions(+), 1 deletion(-)
+ drivers/gpu/drm/bridge/Makefile     |   1 +
+ drivers/gpu/drm/bridge/lt9611-i2c.c | 947 ++++++++++++++++++++++++++++++++++++
+ 3 files changed, 957 insertions(+)
  create mode 100644 drivers/gpu/drm/bridge/lt9611-i2c.c
 
 diff --git a/drivers/gpu/drm/bridge/Kconfig b/drivers/gpu/drm/bridge/Kconfig
@@ -31,23 +31,22 @@ index cbb2138..b0b6b05 100644
  	tristate "Chipone ICN6211 MIPI-DSI to RGB bridge"
  	depends on OF
 diff --git a/drivers/gpu/drm/bridge/Makefile b/drivers/gpu/drm/bridge/Makefile
-index 19db905..effac4a 100644
+index 19db905..6c758a8 100644
 --- a/drivers/gpu/drm/bridge/Makefile
 +++ b/drivers/gpu/drm/bridge/Makefile
-@@ -6,6 +6,6 @@ obj-$(CONFIG_DRM_RK1000) += rk1000.o
- obj-$(CONFIG_DRM_DUMB_VGA_DAC) += dumb-vga-dac.o
+@@ -7,5 +7,6 @@ obj-$(CONFIG_DRM_DUMB_VGA_DAC) += dumb-vga-dac.o
  obj-$(CONFIG_DRM_LONTIUM_LT8912) += lt8912.o
  obj-$(CONFIG_DRM_CHIPONE_ICN6211) += icn6211.o
--
+ 
 +obj-$(CONFIG_DRM_LONTIUM_LT9611_I2C) += lt9611-i2c.o
  obj-y += analogix/
  obj-y += synopsys/
 diff --git a/drivers/gpu/drm/bridge/lt9611-i2c.c b/drivers/gpu/drm/bridge/lt9611-i2c.c
 new file mode 100644
-index 0000000..f60b88b
+index 0000000..9e1d2a9
 --- /dev/null
 +++ b/drivers/gpu/drm/bridge/lt9611-i2c.c
-@@ -0,0 +1,946 @@
+@@ -0,0 +1,947 @@
 +/* Copyright (c) 2017, The Linux Foundation. All rights reserved.
 + *
 + * This program is free software; you can redistribute it and/or modify
@@ -892,7 +891,8 @@ index 0000000..f60b88b
 +    struct lt9611 *lt9611;
 +
 +   // if(1) return 0;
-+	
++
++    printk("ADLINK ,LT9611 DRIVER \n");	
 +	lt9611 = devm_kzalloc(dev, sizeof(*lt9611), GFP_KERNEL);
 +	if (!lt9611){
 +		dev_err(dev, "failed to alloc memory\n");

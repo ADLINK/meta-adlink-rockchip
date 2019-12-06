@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# Restore alsa sound state
+alsactl restore 0 -f /var/lib/alsa/asound.state
+
