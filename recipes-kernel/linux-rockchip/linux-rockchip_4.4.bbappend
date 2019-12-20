@@ -1,6 +1,4 @@
 
-#KBUILD_DEFCONFIG = "px30_linux_defconfig"
-
 SRCREV = "e83084b53d4e02f5fd25aad25b42ffd3108c7f15"
 KERNEL_DEFCONFIG = "adlink-px30_config"
 
@@ -20,6 +18,5 @@ SRC_URI += " \
         file://0003-Added-mcp25xxfd-driver-support-for-LEC-PX30-A2.patch \
         file://0004-Added-LT9611-driver-support-for-LEC-PX30-A2.patch \
         file://0005-Modified-compatible-property-as-per-target-kernel-dt.patch \
-        file://0006-Work-around-for-ADS1015-driver-test.patch \
 "
 

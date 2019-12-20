@@ -9,11 +9,10 @@ inherit core-image
 REQUIRED_DISTRO_FEATURES = " x11 "
 
 IMAGE_INSTALL += "packagegroup-core-x11 \
-     	 	  packagegroup-xfce-base "
+		  packagegroup-xfce-base"
 		  
-export IMAGE_BASENAME = "adlink-xfce-rockchip"
-
 
 ### XFCE Tools
-IMAGE_INSTALL += " xterm xclock twm xinit-env startupconfig "
+IMAGE_INSTALL += " xterm xclock twm xinit-env xserver-xorg mesa-demos glmark2 haveged adlinkmraa xfdesktop "
 
+export IMAGE_BASENAME = "xfce"

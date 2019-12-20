@@ -9,15 +9,12 @@ LICENSE = "MIT"
 
 inherit core-image
 
-REQUIRED_DISTRO_FEATURES = "x11"
 
 IMAGE_ROOTFS_SIZE ?= "8192"
 IMAGE_ROOTFS_EXTRA_SPACE_append = "${@bb.utils.contains("DISTRO_FEATURES", "systemd", " + 4096", "" ,d)}"
 
 
-
-
-export IMAGE_BASENAME = "adlink-x11-px30"
+export IMAGE_BASENAME = "minimal"
 
 
 
