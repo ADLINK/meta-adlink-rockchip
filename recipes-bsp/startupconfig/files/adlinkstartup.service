@@ -3,7 +3,7 @@ Description=Adlink startup script during bootup
 
 [Service]
 Type=simple
-ExecStart=/bin/sh -c 'sleep 5 ; /etc/init.d/adlinkstartup'
+ExecStart=/bin/sh -c 'sleep 5 ; /usr/sbin/adlinkstartup'
 Restart=on-failure
 RestartSec=5
 

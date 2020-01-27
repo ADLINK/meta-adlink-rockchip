@@ -5,10 +5,10 @@
 PATCHPATH = "${CURDIR}/u-boot"
 inherit auto-patch
 
-PV = "2017.09+git${SRCPV}"
+PV = "2020.01+git${SRCPV}"
 
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
-SRCREV = "9b4285f197e68cd3e135543e436d36a2522e2dba"
+SRCREV = "0f0484481cafd2d8882568d5583a1abf63e5fe2f"
 SRC_URI = " \
         git://github.com/rockchip-linux/u-boot.git;branch=next-dev \
 "

@@ -1,9 +1,5 @@
 #!/bin/sh
 
-# Restore alsa sound state
-alsactl restore 0 -f /var/lib/alsa/asound.state
-
-
 # Script to Update eth0 MAC address
 
 #delay
@@ -37,6 +33,7 @@ ifconfig eth0 hw ether $e0:$e1:$e2:$e3:$e4:$e5
 
 ifconfig eth0 up
 
+ifconfig eth1 up
 
 echo "eth0 mac updated"
 

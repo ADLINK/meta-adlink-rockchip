@@ -6,6 +6,7 @@ LICENSE = "CLOSED"
 SRC_URI = "\
     file://adlinkstartup \
     file://adlinkstartup.service \
+    file://rockchip_test \
 "
 
 inherit pkgconfig systemd 
@@ -23,9 +24,14 @@ GROUPADD_PARAM_${PN} = "root"
 do_install() {
     install -d "${D}${sysconfdir}/init.d"
     install -m 0755 "${WORKDIR}/adlinkstartup" "${D}${sysconfdir}/init.d/adlinkstartup"
-
+   
     if ${@bb.utils.contains("DISTRO_FEATURES", 'systemd', 'true', 'false', d)}; then
 
+       install -d "${D}/home/root/rockchip_test"
+       install -m 0755 "${WORKDIR}/rockchip_test/eth0MACUpdate.sh" "${D}/home/root/rockchip_test/"
+       install -m 0755 "${WORKDIR}/rockchip_test/eth0EEPROMUpdate.sh" "${D}/home/root/rockchip_test/"
+       install -m 0755 "${WORKDIR}/rockchip_test/eth1EEPROMUpdate.sh" "${D}/home/root/rockchip_test/"
+       
        install -d "${D}${sbindir}"
        install -m 0755 "${WORKDIR}/adlinkstartup" "${D}${sbindir}/adlinkstartup"
 
@@ -37,6 +43,7 @@ do_install() {
 FILES_${PN} += "\
     ${systemd_unitdir}/system-preset \
     ${systemd_unitdir}/system/adlinkstartup.service \
+    /home/root/rockchip_test \
 "
 
 

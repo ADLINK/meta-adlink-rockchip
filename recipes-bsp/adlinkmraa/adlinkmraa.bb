@@ -3,21 +3,16 @@ SECTION = "libs"
 
 LICENSE = "CLOSED"
 
-SRCREV = "7390a5dd4f5bacbbb2bb7f83b6644d9dbf1cd1cc"
+SRCREV = "892113456556c26dd60ff4940155e8d92a9a8daf"
+
 PV = "1.0.0-git"
 
-SRC_URI = "git://github.com/ADLINK-EPM/mraa.git;protocol=http \
-           "
+SRC_URI = "file://MRAA_PX30"
 
-SRC_URI[md5sum] = "6058d6943ef951bc90c53cb53a8a669b"
-SRC_URI[sha256sum] = "6f57dd3fe86c9c33cb1ce001916a06a7dc3678147934372190359f0741f2517c"
-
-S = "${WORKDIR}/git"
+S = "${WORKDIR}/MRAA_PX30"
 
 # CMakeLists.txt checks the architecture, only x86 and ARM supported for now
 COMPATIBLE_HOST = "(x86_64.*|i.86.*|aarch64.*|arm.*)-linux"
-#COMPATIBLE_HOST = '(x86_64|i.86|powerpc64|arm|aarch64|microblazeel|mips).*-linux'
-
 
 inherit cmake
 

@@ -1,0 +1,25 @@
+From d30457247c4235691bd698720d9e8f5b8f7e5d1b Mon Sep 17 00:00:00 2001
+From: Viswanathan <viswanathan.m@adlinktech.com>
+Date: Wed, 22 Jan 2020 17:43:58 +0530
+Subject: [PATCH 5/5] Changed baud rate to 115200
+
+---
+ configs/evb-px30_defconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/configs/evb-px30_defconfig b/configs/evb-px30_defconfig
+index ee82936..f4122cc 100644
+--- a/configs/evb-px30_defconfig
++++ b/configs/evb-px30_defconfig
+@@ -89,7 +89,7 @@ CONFIG_TPL_RAM=y
+ CONFIG_ROCKCHIP_SDRAM_COMMON=y
+ CONFIG_DM_RESET=y
+ CONFIG_RKNAND=y
+-CONFIG_BAUDRATE=1500000
++CONFIG_BAUDRATE=115200
+ CONFIG_DEBUG_UART_BASE=0xFF160000
+ CONFIG_DEBUG_UART_CLOCK=24000000
+ CONFIG_DEBUG_UART_SHIFT=2
+-- 
+2.7.4
+
