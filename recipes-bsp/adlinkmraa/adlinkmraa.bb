@@ -7,9 +7,9 @@ SRCREV = "892113456556c26dd60ff4940155e8d92a9a8daf"
 
 PV = "1.0.0-git"
 
-SRC_URI = "file://MRAA_PX30"
+SRC_URI = "file://mraa"
 
-S = "${WORKDIR}/MRAA_PX30"
+S = "${WORKDIR}/mraa"
 
 # CMakeLists.txt checks the architecture, only x86 and ARM supported for now
 COMPATIBLE_HOST = "(x86_64.*|i.86.*|aarch64.*|arm.*)-linux"
