@@ -1,20 +1,20 @@
-From c8727b46d5d664e831fa8c625f33cec4d795228e Mon Sep 17 00:00:00 2001
+From 9ae6662b0318130c9ecb9b223ecf473e6f335d7d Mon Sep 17 00:00:00 2001
 From: Dineshkumar V <dineshkumar.varadarajan@adlinktech.com>
-Date: Thu, 5 Dec 2019 21:15:38 +0530
+Date: Wed, 19 Feb 2020 16:43:36 +0530
 Subject: [PATCH 4/4] Added LT9611 driver support for LEC-PX30-A2
 
 ---
- drivers/gpu/drm/bridge/Kconfig      |   9 +
- drivers/gpu/drm/bridge/Makefile     |   1 +
- drivers/gpu/drm/bridge/lt9611-i2c.c | 947 ++++++++++++++++++++++++++++++++++++
- 3 files changed, 957 insertions(+)
+ drivers/gpu/drm/bridge/Kconfig      |   7 +
+ drivers/gpu/drm/bridge/Makefile     |   2 +-
+ drivers/gpu/drm/bridge/lt9611-i2c.c | 976 ++++++++++++++++++++++++++++++++++++
+ 3 files changed, 984 insertions(+), 1 deletion(-)
  create mode 100644 drivers/gpu/drm/bridge/lt9611-i2c.c
 
 diff --git a/drivers/gpu/drm/bridge/Kconfig b/drivers/gpu/drm/bridge/Kconfig
-index cbb2138..b0b6b05 100644
+index cbb2138..e4a8f47 100644
 --- a/drivers/gpu/drm/bridge/Kconfig
 +++ b/drivers/gpu/drm/bridge/Kconfig
-@@ -48,6 +48,15 @@ config DRM_LONTIUM_LT8912
+@@ -48,6 +48,13 @@ config DRM_LONTIUM_LT8912
  	help
  	  Lontium LT8912 MIPI-DSI to LVDS and HDMI/MHL bridge chip driver.
  
@@ -25,28 +25,27 @@ index cbb2138..b0b6b05 100644
 +	select REGMAP_I2C
 +	help
 +	  Lontium LT9611 MIPI-DSI to HDMI/MHL bridge chip driver with i2c.
-+
-+
  config DRM_CHIPONE_ICN6211
  	tristate "Chipone ICN6211 MIPI-DSI to RGB bridge"
  	depends on OF
 diff --git a/drivers/gpu/drm/bridge/Makefile b/drivers/gpu/drm/bridge/Makefile
-index 19db905..6c758a8 100644
+index 19db905..effac4a 100644
 --- a/drivers/gpu/drm/bridge/Makefile
 +++ b/drivers/gpu/drm/bridge/Makefile
-@@ -7,5 +7,6 @@ obj-$(CONFIG_DRM_DUMB_VGA_DAC) += dumb-vga-dac.o
+@@ -6,6 +6,6 @@ obj-$(CONFIG_DRM_RK1000) += rk1000.o
+ obj-$(CONFIG_DRM_DUMB_VGA_DAC) += dumb-vga-dac.o
  obj-$(CONFIG_DRM_LONTIUM_LT8912) += lt8912.o
  obj-$(CONFIG_DRM_CHIPONE_ICN6211) += icn6211.o
- 
+-
 +obj-$(CONFIG_DRM_LONTIUM_LT9611_I2C) += lt9611-i2c.o
  obj-y += analogix/
  obj-y += synopsys/
 diff --git a/drivers/gpu/drm/bridge/lt9611-i2c.c b/drivers/gpu/drm/bridge/lt9611-i2c.c
 new file mode 100644
-index 0000000..9e1d2a9
+index 0000000..cdf763d
 --- /dev/null
 +++ b/drivers/gpu/drm/bridge/lt9611-i2c.c
-@@ -0,0 +1,947 @@
+@@ -0,0 +1,976 @@
 +/* Copyright (c) 2017, The Linux Foundation. All rights reserved.
 + *
 + * This program is free software; you can redistribute it and/or modify
@@ -274,6 +273,13 @@ index 0000000..9e1d2a9
 +	regmap_write(lt9611->regmap, 0x0d, 0xef);
 +	regmap_write(lt9611->regmap, 0x11, 0xfa);
 +	
++}
++
++void lt9611_hdmi_out_disable(struct lt9611 *lt9611) //dsren
++{
++	regmap_write(lt9611->regmap, 0xff,0x81);
++	regmap_write(lt9611->regmap, 0x30,0x00); /* Txphy PD */
++	regmap_write(lt9611->regmap, 0x23,0x80); /* Txpll PD */ 
 +}
 +
 +static void lt9611_mipi_input_analog(struct lt9611 *lt9611)//xuxi
@@ -884,6 +890,27 @@ index 0000000..9e1d2a9
 +}
 +static DEVICE_ATTR(audio, 0664, audio_show, audio_store);
 +
++static int lt9611_bridge_suspend(struct device *dev)
++{
++	struct lt9611 *lt9611 = dev_get_drvdata(dev);
++	lt9611_hdmi_out_disable(lt9611);
++	return 0;
++}
++
++static int lt9611_bridge_resume(struct device *dev)
++{
++	struct lt9611 *lt9611 = dev_get_drvdata(dev);
++	lt9611_pll(lt9611);
++	lt9611_mipi_pcr(lt9611);
++	lt9611_hdmi_tx_digital(lt9611);	
++	lt9611_hdmi_out_enable(lt9611);
++	return 0;
++}
++
++static SIMPLE_DEV_PM_OPS(lt9611_bridge_pm_ops,
++			 lt9611_bridge_suspend,
++			 lt9611_bridge_resume);
++
 +static int lt9611_probe(struct i2c_client *client, const struct i2c_device_id *id)
 +{
 +	struct device *dev = &client->dev;
@@ -969,6 +996,7 @@ index 0000000..9e1d2a9
 +		.name		= "lt9611",
 +		.owner		= THIS_MODULE,
 +		.of_match_table = lt9611_match_table,
++		.pm		= &lt9611_bridge_pm_ops,
 +	},
 +    .probe			= lt9611_probe,
 +	.remove			= lt9611_remove,

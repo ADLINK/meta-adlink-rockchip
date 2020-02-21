@@ -13,6 +13,6 @@ IMAGE_INSTALL += "packagegroup-core-x11 \
 		  
 
 ### XFCE Tools
-IMAGE_INSTALL += " xterm xclock twm xinit-env xserver-xorg mesa-demos glmark2 haveged adlinkmraa xfdesktop "
+IMAGE_INSTALL += " garcon xterm xclock twm xinit-env xserver-xorg mesa-demos glmark2 haveged adlinkmraa xfdesktop xfce4-screenshooter ristretto adlinkspitool "
 
 export IMAGE_BASENAME = "xfce"
