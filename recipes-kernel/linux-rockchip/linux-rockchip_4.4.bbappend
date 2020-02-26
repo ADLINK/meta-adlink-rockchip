@@ -19,5 +19,6 @@ SRC_URI += " \
         file://0004-Added-LT9611-driver-support-for-LEC-PX30-A2.patch \
         file://0005-Modified-compatible-property-as-per-target-kernel-dt.patch \
         file://0006-Added-Sx150x-gpio-expander-suppport-for-LEC-PX30-A2.patch \
+        file://0007-Added-SPI-chip-select-enable-disable-support-for-SPI.patch \
 "
 
