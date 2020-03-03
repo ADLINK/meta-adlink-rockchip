@@ -22,3 +22,5 @@ SRC_URI += " \
         file://0007-Added-SPI-chip-select-enable-disable-support-for-SPI.patch \
 "
 
+# Comment the below line to mount file system from eMMC
+SRC_URI += "file://0008-Modified-Boot-Arguments-to-mount-fileystem-from-SD-c.patch"
