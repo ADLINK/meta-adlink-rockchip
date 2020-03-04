@@ -21,7 +21,7 @@
 # This sets the default machine to be qemux86 if no other machine is selected:
 #MACHINE ??= "qemux86"
 #MACHINE ??= "rockchip-px30-evb"
-MACHINE = "adlink-px30"
+MACHINE = "lec-px30"
 
 
 

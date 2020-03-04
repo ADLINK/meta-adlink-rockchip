@@ -1,6 +1,6 @@
 
 SRCREV = "e83084b53d4e02f5fd25aad25b42ffd3108c7f15"
-KERNEL_DEFCONFIG = "adlink-px30_config"
+KERNEL_DEFCONFIG = "lec-px30_config"
 
 do_configure_prepend() {
     cp ${WORKDIR}/${KERNEL_DEFCONFIG} ${S}/arch/arm64/configs/
@@ -12,7 +12,7 @@ do_configure_prepend() {
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 SRC_URI += " \
-        file://adlink-px30_config \
+        file://lec-px30_config \
         file://0001-Device-tree-for-LEC-PX30-A2.patch \
         file://0002-Added-ethernet-driver-support-for-LEC-PX30-A2.patch \
         file://0003-Added-mcp25xxfd-driver-support-for-LEC-PX30-A2.patch \
