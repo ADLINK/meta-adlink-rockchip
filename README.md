@@ -17,7 +17,7 @@
 ### Dowload a Live OS image for quick evaluation:
 <ul>
 <li>
-LEC-PX30 with IPi-SMARC Image (without Desktop Environment) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://drive.google.com/file/d/11Ghbd9_Af2UVl7lTM2enyA103EgH0B_G/view?usp=sharing" rel="noopener"><img src="https://cdn3.iconfinder.com/data/icons/wireless/512/4-512.png" width="25" /></a>
+LEC-PX30 with IPi-SMARC Image (with xfce Desktop Environment) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://hq0epm0west0us0storage.blob.core.windows.net/development/LEC-PX30/Images/Yocto/v1.0.5-20200226/LEC-PX30-IPi-SMARC_Yocto-v1.0.5_SD_20200226.zip><img src="https://cdn3.iconfinder.com/data/icons/wireless/512/4-512.png" width="25" /></a>
  </li>
 </ul>
 
