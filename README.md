@@ -9,7 +9,7 @@
 | <img src="https://i.imgur.com/0blWdgg.png" width="200"/> | **LEC-PX30** ([More details](https://www.adlinktech.com/Products/Computer_on_Modules/SMARC/LEC-PX30?lang=en))  <br />     SMARC Short Size Module with Rockchip PX30 Quad-Core ARM Cortex A35<br /> |
 
 
-**Note**: Up-to-date branch is [thud](https://github.com/ADLINK/meta-adlink-rockchip/tree/rocko)
+**Note**: Up-to-date branch is [thud](https://github.com/ADLINK/meta-adlink-rockchip/tree/thud)
 
 
 <br>
