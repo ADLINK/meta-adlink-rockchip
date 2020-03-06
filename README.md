@@ -21,7 +21,8 @@ LEC-PX30 with IPi-SMARC Image (with xfce Desktop Environment on SD Card) &nbsp; 
  </li>
 </ul>
 
-**Note:** Login name is not required / password: adlink123
+**Note:** 
+  1. Login name is not required / password: adlink123
 
 <br>
 
