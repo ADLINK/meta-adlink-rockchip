@@ -3,13 +3,15 @@ SECTION = "libs"
 
 LICENSE = "CLOSED"
 
-SRCREV = "892113456556c26dd60ff4940155e8d92a9a8daf"
+SRCREV = "e15ce6fbc76148ba8835adc92196b0d0a3f245e7"
+PV = "1.9.0-git${SRCPV}"
 
-PV = "1.0.0-git"
+SRC_URI = "git://github.com/intel-iot-devkit/mraa.git;protocol=http \
+	   file://0001-Added-Test-applications-support.patch \
+           "
 
-SRC_URI = "file://mraa"
 
-S = "${WORKDIR}/mraa"
+S = "${WORKDIR}/git"
 
 # CMakeLists.txt checks the architecture, only x86 and ARM supported for now
 COMPATIBLE_HOST = "(x86_64.*|i.86.*|aarch64.*|arm.*)-linux"

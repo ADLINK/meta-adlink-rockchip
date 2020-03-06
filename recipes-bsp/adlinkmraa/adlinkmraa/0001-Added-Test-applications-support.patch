@@ -1,0 +1,570 @@
+From 37591d4376d1e07bf38772428cfa07875994c6de Mon Sep 17 00:00:00 2001
+From: Arun Kumar E V <dineshkumar.varadarajan@adlinktech.com>
+Date: Mon, 2 Mar 2020 15:50:27 +0530
+Subject: [PATCH] Added Test applications support
+
+---
+ examples/c/CMakeLists.txt         |  14 +++++
+ examples/c/adlink_gpio.c          |  72 ++++++++++++++++++++++
+ examples/c/adlink_gpio_advanced.c | 126 ++++++++++++++++++++++++++++++++++++++
+ examples/c/adlink_i2c.c           |  66 ++++++++++++++++++++
+ examples/c/adlink_mraa.c          |  22 +++++++
+ examples/c/adlink_pwm.c           |  71 +++++++++++++++++++++
+ examples/c/adlink_spi.c           |  66 ++++++++++++++++++++
+ examples/c/adlink_uart.c          |  47 ++++++++++++++
+ 8 files changed, 484 insertions(+)
+ create mode 100644 examples/c/adlink_gpio.c
+ create mode 100644 examples/c/adlink_gpio_advanced.c
+ create mode 100644 examples/c/adlink_i2c.c
+ create mode 100644 examples/c/adlink_mraa.c
+ create mode 100644 examples/c/adlink_pwm.c
+ create mode 100644 examples/c/adlink_spi.c
+ create mode 100644 examples/c/adlink_uart.c
+
+diff --git a/examples/c/CMakeLists.txt b/examples/c/CMakeLists.txt
+index 0821810..c1f4291 100644
+--- a/examples/c/CMakeLists.txt
++++ b/examples/c/CMakeLists.txt
+@@ -9,6 +9,13 @@ add_executable(pwm pwm.c)
+ add_executable(spi spi.c)
+ add_executable(uart uart.c)
+ add_executable(uart_advanced uart_advanced.c)
++add_executable(adlink_mraa adlink_mraa.c)
++add_executable(adlink_gpio adlink_gpio.c)
++add_executable(adlink_gpio_advanced adlink_gpio_advanced.c)
++add_executable(adlink_i2c adlink_i2c.c)
++add_executable(adlink_spi adlink_spi.c)
++add_executable(adlink_uart adlink_uart.c)
++add_executable(adlink_pwm adlink_pwm.c)
+ if (NOT ANDROID_TOOLCHAIN)
+   add_executable(iio iio.c)
+ endif()
+@@ -27,6 +34,13 @@ target_link_libraries(pwm mraa)
+ target_link_libraries(spi mraa)
+ target_link_libraries(uart mraa)
+ target_link_libraries(uart_advanced mraa)
++target_link_libraries(adlink_mraa mraa)
++target_link_libraries(adlink_gpio mraa)
++target_link_libraries(adlink_gpio_advanced mraa)
++target_link_libraries(adlink_i2c mraa)
++target_link_libraries(adlink_spi mraa)
++target_link_libraries(adlink_uart mraa)
++target_link_libraries(adlink_pwm mraa)
+ if (NOT ANDROID_TOOLCHAIN)
+   target_link_libraries(iio mraa)
+ endif()
+diff --git a/examples/c/adlink_gpio.c b/examples/c/adlink_gpio.c
+new file mode 100644
+index 0000000..60ea05d
+--- /dev/null
++++ b/examples/c/adlink_gpio.c
+@@ -0,0 +1,72 @@
++#include <stdio.h>
++#include <stdlib.h>
++#include <string.h>
++#include <syslog.h>
++#include "mraa.h"
++#include <signal.h>
++#include <unistd.h>
++
++volatile sig_atomic_t flag = 1;
++
++void
++sig_handler(int signum)
++{
++    if (signum == SIGINT) {
++        fprintf(stdout, "Exiting...\n");
++        flag = 0;
++    }
++}
++
++
++
++int main(int argc, char** argv)
++{
++	if(argc < 2) {
++		fprintf(stderr, "Invalid arguments!!!\n");
++		return EXIT_FAILURE;
++	}
++
++	int gpio_pin;
++	const char* board_name = mraa_get_platform_name();
++	gpio_pin = atoi(argv[1]);		
++	fprintf(stdout, "MRAA!!!\n Version: %s\n Running on %s\n", mraa_get_version(), board_name);
++
++	//GPIO
++	mraa_gpio_context gpio;
++	mraa_result_t status;
++
++    /* install signal handler */
++    signal(SIGINT, sig_handler);
++
++	/* initialize GPIO pin */
++	gpio = mraa_gpio_init(gpio_pin);
++	if (gpio == NULL) {
++		fprintf(stderr, "Failed to initialize GPIO %d\n", gpio_pin);
++		mraa_deinit();
++		return;
++	}
++
++	status = mraa_gpio_dir(gpio, MRAA_GPIO_OUT);
++	if (status != MRAA_SUCCESS) {
++		fprintf(stderr, "GPIO direction setup failed%d\n", gpio_pin);
++	}
++
++	while(flag)
++	{
++		status = mraa_gpio_write(gpio, 1);
++		if (status != MRAA_SUCCESS) {
++			fprintf(stderr, "GPIO write failed%d\n", gpio_pin);
++		}
++		sleep(1);
++
++		status = mraa_gpio_write(gpio, 0);
++		if (status != MRAA_SUCCESS) {
++			fprintf(stderr, "GPIO write failed%d\n", gpio_pin);
++		}
++		sleep(1);
++	}
++
++	mraa_deinit();
++
++	return MRAA_SUCCESS;
++}
+diff --git a/examples/c/adlink_gpio_advanced.c b/examples/c/adlink_gpio_advanced.c
+new file mode 100644
+index 0000000..4ff886e
+--- /dev/null
++++ b/examples/c/adlink_gpio_advanced.c
+@@ -0,0 +1,126 @@
++/*
++ * Author: Brendan Le Foll
++ * Contributors: Alex Tereschenko <alext.mkrs@gmail.com>
++ * Contributors: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>
++ * Copyright (c) 2014 Intel Corporation.
++ *
++ * Permission is hereby granted, free of charge, to any person obtaining
++ * a copy of this software and associated documentation files (the
++ * "Software"), to deal in the Software without restriction, including
++ * without limitation the rights to use, copy, modify, merge, publish,
++ * distribute, sublicense, and/or sell copies of the Software, and to
++ * permit persons to whom the Software is furnished to do so, subject to
++ * the following conditions:
++ *
++ * The above copyright notice and this permission notice shall be
++ * included in all copies or substantial portions of the Software.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
++ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
++ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
++ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
++ * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
++ * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
++ * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
++ *
++ * Example usage: Configures GPIO pin for interrupt and waits 30 seconds for the isr to trigger
++ *
++ */
++
++/* standard headers */
++#include <signal.h>
++#include <stdio.h>
++#include <stdlib.h>
++#include <unistd.h>
++
++
++/* mraa header */
++#include "mraa/gpio.h"
++
++//#define GPIO_PIN 16
++
++volatile sig_atomic_t flag = 1;
++
++void
++sig_handler(int signum)
++{
++    if (signum == SIGINT) {
++        fprintf(stdout, "Exiting...\n");
++        flag = 0;
++    }
++}
++
++
++
++void
++int_handler(void* args)
++{
++    fprintf(stdout, "ISR triggered\n");
++}
++
++int
++main(int argc, char *argv[])
++{
++	if(argc != 2) {
++		fprintf(stderr, "Invalid arguments!!!\n");
++		return EXIT_FAILURE;
++	}
++
++	int gpio_pin;
++	gpio_pin = atoi(argv[1]);
++
++	if (gpio_pin < 1 || gpio_pin > 40)
++	{
++		fprintf(stderr, "Invalid pin number. Valid pins are 1-40 !!\n");
++		return EXIT_FAILURE;
++	}
++    /* install signal handler */
++    signal(SIGINT, sig_handler);
++ 
++    mraa_result_t status = MRAA_SUCCESS;
++    mraa_gpio_context gpio;
++
++    /* initialize mraa for the platform (not needed most of the times) */
++    mraa_init();
++
++    //! [Interesting]
++    /* initialize GPIO pin */
++    gpio = mraa_gpio_init(gpio_pin);
++    if (gpio == NULL) {
++        fprintf(stderr, "Failed to initialize GPIO %d\n", gpio_pin);
++        mraa_deinit();
++        return EXIT_FAILURE;
++    }
++
++    /* set GPIO to input */
++    status = mraa_gpio_dir(gpio, MRAA_GPIO_IN);
++    if (status != MRAA_SUCCESS) {
++        goto err_exit;
++    }
++
++    /* configure ISR for GPIO */
++    status = mraa_gpio_isr(gpio, MRAA_GPIO_EDGE_BOTH, &int_handler, NULL);
++    if (status != MRAA_SUCCESS) {
++        goto err_exit;
++    }
++
++    /* wait 30 seconds isr trigger */
++    sleep(30);
++
++    /* close GPIO */
++    mraa_gpio_close(gpio);
++
++    //! [Interesting]
++    /* deinitialize mraa for the platform (not needed most of the times) */
++    mraa_deinit();
++
++    return EXIT_SUCCESS;
++
++err_exit:
++    mraa_result_print(status);
++
++    /* deinitialize mraa for the platform (not needed most of the times) */
++    mraa_deinit();
++
++    return EXIT_FAILURE;
++}
+diff --git a/examples/c/adlink_i2c.c b/examples/c/adlink_i2c.c
+new file mode 100644
+index 0000000..cb066f5
+--- /dev/null
++++ b/examples/c/adlink_i2c.c
+@@ -0,0 +1,66 @@
++/* standard headers */
++#include <endian.h>
++#include <signal.h>
++#include <stdio.h>
++#include <stdlib.h>
++#include <unistd.h>
++
++/* mraa header */
++#include "mraa/i2c.h"
++
++/* I2C bus */
++#define I2C_BUS 0
++
++/* register definitions */
++#define I2C_ADDR 0x68
++
++int main (void)
++{
++    mraa_result_t status = MRAA_SUCCESS;
++    mraa_i2c_context i2c;
++    uint8_t data;
++    int ret;
++
++    /* initialize mraa for the platform (not needed most of the times) */
++    mraa_init();
++
++    /* initialize I2C bus */
++    i2c = mraa_i2c_init(I2C_BUS);
++    if (i2c == NULL) {
++        fprintf(stderr, "Failed to initialize I2C\n");
++        mraa_deinit();
++        return EXIT_FAILURE;
++    }
++
++    /* set slave address */
++    status = mraa_i2c_address(i2c, I2C_ADDR);
++    if (status != MRAA_SUCCESS) {
++        goto err_exit;
++    }
++
++    /* reset the sensor */
++    status = mraa_i2c_write_byte_data(i2c, 0x12, 0x34);
++    if (status != MRAA_SUCCESS) {
++        goto err_exit;
++    }
++
++    /* stop i2c */
++    mraa_i2c_stop(i2c);
++
++    //! [Interesting]
++    /* deinitialize mraa for the platform (not needed most of the times) */
++    mraa_deinit();
++
++    return EXIT_SUCCESS;
++
++err_exit:
++    mraa_result_print(status);
++
++    /* stop i2c */
++    mraa_i2c_stop(i2c);
++
++    /* deinitialize mraa for the platform (not needed most of the times) */
++    mraa_deinit();
++
++    return EXIT_FAILURE;
++}
+diff --git a/examples/c/adlink_mraa.c b/examples/c/adlink_mraa.c
+new file mode 100644
+index 0000000..8e6432c
+--- /dev/null
++++ b/examples/c/adlink_mraa.c
+@@ -0,0 +1,22 @@
++#include <stdio.h>
++#include <string.h>
++#include <syslog.h>
++#include "mraa.h"
++
++int main(int argc, char** argv)
++{
++	int i;
++	int pin_count = mraa_get_pin_count();
++	const char* board_name = mraa_get_platform_name();
++
++	fprintf(stdout, "MRAA!!!\n Version: %s\n Running on %s\n", mraa_get_version(), board_name);
++	fprintf(stdout, "pin count = %d\n", pin_count);
++
++	for(i=0; i<pin_count; i++) {
++		fprintf(stdout, "%2d -> %s\n", i, mraa_get_pin_name(i));
++	}
++
++	mraa_deinit();
++
++	return MRAA_SUCCESS;
++}
+diff --git a/examples/c/adlink_pwm.c b/examples/c/adlink_pwm.c
+new file mode 100644
+index 0000000..d1b891e
+--- /dev/null
++++ b/examples/c/adlink_pwm.c
+@@ -0,0 +1,71 @@
++/* standard headers */
++#include <stdlib.h>
++#include <unistd.h>
++
++/* mraa header */
++#include "mraa/pwm.h"
++
++int main(int argc, char** argv)
++{
++    if(argc < 4) {
++        fprintf(stderr, "Invalid arguments!!!\n");
++        return EXIT_FAILURE;
++    }
++
++    mraa_result_t status = MRAA_SUCCESS;
++    mraa_pwm_context pwm;
++    int pwm_pin = atoi(argv[1]);
++    int freq = atoi(argv[2]);
++    int duty_cycle = atoi(argv[3]);
++
++    /* initialize mraa for the platform (not needed most of the times) */
++    mraa_init();
++
++    //! [Interesting]
++    pwm = mraa_pwm_init(pwm_pin);
++    if (pwm == NULL) {
++        fprintf(stderr, "Failed to initialize PWM\n");
++        mraa_deinit();
++        return EXIT_FAILURE;
++    }
++
++    /* set PWM period */
++    status = mraa_pwm_period_us(pwm, freq);
++    if (status != MRAA_SUCCESS) {
++        goto err_exit;
++    }
++
++    /* set PWM duty cycle */
++    status = mraa_pwm_pulsewidth_us(pwm, duty_cycle);
++    if (status != MRAA_SUCCESS) {
++        goto err_exit;
++    }
++
++    /* enable PWM */
++    status = mraa_pwm_enable(pwm, 1);
++    if (status != MRAA_SUCCESS) {
++        goto err_exit;
++    }
++
++    while(1);
++
++    /* close PWM */
++    mraa_pwm_close(pwm);
++
++    //! [Interesting]
++    /* deinitialize mraa for the platform (not needed most of the times) */
++    mraa_deinit();
++
++    return EXIT_SUCCESS;
++
++err_exit:
++    mraa_result_print(status);
++
++    /* close PWM */
++    mraa_pwm_close(pwm);
++
++    /* deinitialize mraa for the platform (not needed most of the times) */
++    mraa_deinit();
++
++    return EXIT_FAILURE;
++}
+diff --git a/examples/c/adlink_spi.c b/examples/c/adlink_spi.c
+new file mode 100644
+index 0000000..281d5b0
+--- /dev/null
++++ b/examples/c/adlink_spi.c
+@@ -0,0 +1,66 @@
++#include <stdio.h>
++#include <string.h>
++#include <syslog.h>
++#include "mraa.h"
++
++/* SPI declaration */
++#define SPI_BUS 0
++
++/* SPI frequency in Hz */
++#define SPI_FREQ 100000
++
++int main(int argc, char** argv)
++{
++	const char* board_name = mraa_get_platform_name();
++
++	fprintf(stdout, "MRAA!!!\n Version: %s\n Running on %s\n", mraa_get_version(), board_name);
++
++	mraa_result_t status = MRAA_SUCCESS;
++	mraa_spi_context spi;
++	int i, j;
++
++	/* initialize mraa for the platform (not needed most of the times) */
++	mraa_init();
++
++	/* initialize SPI bus */
++	spi = mraa_spi_init(SPI_BUS);
++	if (spi == NULL) {
++		fprintf(stderr, "Failed to initialize SPI\n");
++		mraa_deinit();
++		return EXIT_FAILURE;
++	}
++
++	/* set SPI frequency */
++	status = mraa_spi_frequency(spi, SPI_FREQ);
++	if (status != MRAA_SUCCESS)
++		goto err_exit;
++
++	while (1) {
++		for (i = 1; i <= 8; i++) {
++			for (j = 0; j < 8; j++) {
++				mraa_spi_write_word(spi, (i << 8) + (1 << j));
++				sleep(1);
++			}
++			mraa_spi_write_word(spi, i << 8);
++		}
++	}
++
++	/* stop spi */
++	mraa_spi_stop(spi);
++
++	mraa_deinit();
++
++	return MRAA_SUCCESS;
++
++
++err_exit:
++	mraa_result_print(status);
++
++	/* stop spi */
++	mraa_spi_stop(spi);
++
++	/* deinitialize mraa for the platform (not needed most of the times) */
++	mraa_deinit();
++
++	exit(EXIT_FAILURE);
++}
+diff --git a/examples/c/adlink_uart.c b/examples/c/adlink_uart.c
+new file mode 100644
+index 0000000..4d03dac
+--- /dev/null
++++ b/examples/c/adlink_uart.c
+@@ -0,0 +1,47 @@
++#include <signal.h>
++#include <stdio.h>
++#include <stdlib.h>
++#include <unistd.h>
++
++/* mraa header */
++#include "mraa/uart.h"
++
++#define UART 0
++
++int main(int argc, char** argv)
++{
++    mraa_uart_context uart;
++    char buffer[] = "Adlink MRAA!\r\n";
++
++    /* initialize mraa for the platform (not needed most of the times) */
++    mraa_init();
++
++    /* initialize UART */
++    uart = mraa_uart_init(UART);
++    if (uart == NULL) {
++        fprintf(stderr, "Failed to initialize UART\n");
++        goto err_exit;
++    }
++
++    while (1) {
++        /* send data through UART */
++        mraa_uart_write(uart, buffer, sizeof(buffer));
++
++        sleep(1);
++    }
++
++    /* stop UART */
++    mraa_uart_stop(uart);
++
++    //! [Interesting]
++    /* deinitialize mraa for the platform (not needed most of the times) */
++    mraa_deinit();
++
++    return EXIT_SUCCESS;
++
++err_exit:
++    /* deinitialize mraa for the platform (not needed most of the times) */
++    mraa_deinit();
++
++    return EXIT_FAILURE;
++}
+-- 
+2.7.4
+
