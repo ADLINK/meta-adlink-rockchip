@@ -155,5 +155,4 @@ CONF_VERSION = "1"
 ######################################################################################
 BBMASK = "meta-rockchip/recipes-bsp/u-boot/u-boot%.bbappend"
 
-CONNECTIVITY_CHECK_URIS = "https://www.google.com/"
 

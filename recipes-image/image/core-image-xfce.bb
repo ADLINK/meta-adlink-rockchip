@@ -18,4 +18,4 @@ IMAGE_INSTALL += " garcon xterm xclock twm xinit-env xserver-xorg mesa-demos glm
 IMAGE_INSTALL_append = " packagegroup-base packagegroup-core-full-cmdline usbutils i2c-tools can-utils alsa-utils lmsensors-sensors dhcp-server dhcp-client pkgconfig connman startupconfig cmake packagegroup-core-buildessential vim "
 
 
-export IMAGE_BASENAME = "xfce"
+export IMAGE_BASENAME = "xfce-sd"
