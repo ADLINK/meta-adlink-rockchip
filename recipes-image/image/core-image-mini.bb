@@ -5,7 +5,7 @@ SUMMARY = "A small image just capable of allowing a device to boot."
 
 IMAGE_INSTALL = "packagegroup-core-boot ${CORE_IMAGE_EXTRA_INSTALL}"
 
-IMAGE_INSTALL_append = " packagegroup-base packagegroup-core-full-cmdline usbutils i2c-tools can-utils alsa-utils lmsensors-sensors dhcp-server dhcp-client pkgconfig connman startupconfig cmake packagegroup-core-buildessential vim adlinkmraa "
+IMAGE_INSTALL_append = " packagegroup-base packagegroup-core-full-cmdline usbutils i2c-tools can-utils alsa-utils lmsensors-sensors dhcp-server dhcp-client pkgconfig connman startupconfig cmake packagegroup-core-buildessential vim python3-mraa mraa-utils mraa-dev mraa-doc mraa "
 
 
 LICENSE = "MIT"
