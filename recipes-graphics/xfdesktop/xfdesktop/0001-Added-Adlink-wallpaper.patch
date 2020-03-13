@@ -1,27 +1,27 @@
-From 4833cf7dddc15c2a5904524bd413c11c3336bd05 Mon Sep 17 00:00:00 2001
-From: Dinesh kumar <dineshkumar.varadarajan@adlinktech.com>
-Date: Mon, 21 Jan 2019 09:42:59 +0530
+From e9ab6878def2deb2e621854691468a485d1230fe Mon Sep 17 00:00:00 2001
+From: Dineshkumar V <dineshkumar.varadarajan@adlinktech.com>
+Date: Thu, 12 Mar 2020 21:15:36 +0530
 Subject: [PATCH] Added Adlink wallpaper
 
 ---
- backgrounds/Makefile.am | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ backgrounds/Makefile.am | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
 diff --git a/backgrounds/Makefile.am b/backgrounds/Makefile.am
-index 901aa1c7..2668c207 100644
+index 35857a2..2eee901 100644
 --- a/backgrounds/Makefile.am
 +++ b/backgrounds/Makefile.am
-@@ -4,8 +4,8 @@
+@@ -4,9 +4,7 @@
  backgroundsdir = $(datadir)/backgrounds/xfce
  
  backgrounds_DATA = \
 -    xfce-blue.jpg \
+-    xfce-stripes.png \
 -    xfce-teal.jpg
-+    adlink.jpg 
-+    
-                     
++    adlink.jpg
+ 
  
  EXTRA_DIST = $(backgrounds_DATA)
 -- 
-2.18.0
+2.7.4
 

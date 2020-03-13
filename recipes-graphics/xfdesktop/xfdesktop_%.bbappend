@@ -10,7 +10,7 @@ SRC_URI_append = " file://0001-Added-Adlink-wallpaper.patch \
 "
  
 do_configure_append() {
- cp -a ${WORKDIR}/adlink.jpg  ${WORKDIR}/xfdesktop-4.13.2/backgrounds 
+ cp -a ${WORKDIR}/adlink.jpg  ${WORKDIR}/xfdesktop-4.14.1/backgrounds 
 }
 
 FILES_${PN} += "${datadir}/backgrounds"
