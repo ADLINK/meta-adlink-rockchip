@@ -26,7 +26,7 @@ LEC-PX30 with IPi-SMARC Image (with xfce Desktop Environment on SD Card) &nbsp; 
 
 <br>
 
-### Please refer to [User Guide](https://github.com/ADLINK/meta-adlink-rockchip/wiki) for Yocto BSP building
+### Please refer to [Yocto wiki](https://github.com/ADLINK/meta-adlink-rockchip/wiki) for Yocto BSP building
  
 <br>
 <br>
