@@ -1,0 +1,247 @@
+From ffccace0ab6e3e4e5eea46b37c0021402b2ae876 Mon Sep 17 00:00:00 2001
+From: liming <lm@lanxus.com>
+Date: Wed, 8 May 2019 17:40:58 +0800
+Subject: [PATCH 2/3] uart0 test
+
+Change-Id: I79ba79c2a42c3d3356862efa2b513056cb05da90
+---
+ arch/arm/dts/px30-evb.dts          |  9 ++--
+ arch/arm/mach-rockchip/board.c     |  6 +--
+ arch/arm/mach-rockchip/px30/px30.c | 87 ++++++++++++++++++++++++++++++++++++++
+ configs/evb-px30_defconfig         |  4 +-
+ drivers/net/gmac_rockchip.c        |  4 +-
+ 5 files changed, 101 insertions(+), 9 deletions(-)
+
+diff --git a/arch/arm/dts/px30-evb.dts b/arch/arm/dts/px30-evb.dts
+index 906c1f1..491013b 100644
+--- a/arch/arm/dts/px30-evb.dts
++++ b/arch/arm/dts/px30-evb.dts
+@@ -94,6 +94,9 @@
+ 	vcc_phy: vcc-phy-regulator {
+ 		compatible = "regulator-fixed";
+ 		regulator-name = "vcc_phy";
++		gpio = <&gpio2 8 GPIO_ACTIVE_HIGH>;
++                /*pinctrl-name="default";
++                pinctrl-0=<&eth_phy_pwr>;*/
+ 		regulator-always-on;
+ 		regulator-boot-on;
+ 	};
+@@ -104,7 +107,7 @@
+ 	clock_in_out = "output";
+ 	snps,reset-gpio = <&gpio2 13 GPIO_ACTIVE_LOW>;
+ 	snps,reset-active-low;
+-	snps,reset-delays-us = <0 50000 50000>;
++	snps,reset-delays-us = <0 1000000  1000000>;
+ 	status = "okay";
+ };
+ 
+@@ -273,12 +276,12 @@
+ 				regulator-always-on;
+ 				regulator-boot-on;
+ 				regulator-min-microvolt = <1800000>;
+-				regulator-max-microvolt = <3300000>;
++				regulator-max-microvolt = <1800000>;
+ 
+ 				regulator-name = "vccio_sd";
+ 				regulator-state-mem {
+ 					regulator-on-in-suspend;
+-					regulator-suspend-microvolt = <3300000>;
++					regulator-suspend-microvolt = <1800000>;
+ 				};
+ 			};
+ 
+diff --git a/arch/arm/mach-rockchip/board.c b/arch/arm/mach-rockchip/board.c
+index 1613644..41f4d27 100644
+--- a/arch/arm/mach-rockchip/board.c
++++ b/arch/arm/mach-rockchip/board.c
+@@ -243,10 +243,10 @@ static void early_bootrom_download(void)
+ int board_init(void)
+ {
+ 	int ret;
+-
+-	board_debug_uart_init();
++//1111111111111111111
++	//board_debug_uart_init();
+ 	early_bootrom_download();
+-
++        printf("##############board_init##############\n");
+ #ifdef CONFIG_USING_KERNEL_DTB
+ 	init_kernel_dtb();
+ #endif
+diff --git a/arch/arm/mach-rockchip/px30/px30.c b/arch/arm/mach-rockchip/px30/px30.c
+index 84bf8cb..375d50d 100644
+--- a/arch/arm/mach-rockchip/px30/px30.c
++++ b/arch/arm/mach-rockchip/px30/px30.c
+@@ -75,8 +75,13 @@ int arch_cpu_init(void)
+ #define GRF_BASE		0xff140000
+ #define UART2_BASE		0xff160000
+ #define CRU_BASE		0xff2b0000
++#define PMU_GRF_BASE 		0xff010000
++#define UART0_BASE 		0xff030000
++#define PMU_CRU_BASE		0xff2bc000
+ void board_debug_uart_init(void)
+ {
++#if defined(CONFIG_DEBUG_UART_BASE) && (CONFIG_DEBUG_UART_BASE != 0xff030000)
++
+ 	static struct px30_grf * const grf = (void *)GRF_BASE;
+ 
+ 	/* GRF_IOFUNC_CON0 */
+@@ -87,8 +92,49 @@ void board_debug_uart_init(void)
+ 		CON_IOMUX_UART2SEL_M1,
+ 		CON_IOMUX_UART2SEL_USBPHY,
+ 	};
++ 11111111111
++#endif
+ 
+ #ifdef CONFIG_TPL_BUILD
++
++#if defined(CONFIG_DEBUG_UART_BASE) && (CONFIG_DEBUG_UART_BASE == 0xff030000)
++
++	static struct px30_pmucru * const pmucru = (void *)PMU_CRU_BASE;
++        static struct rk_uart * const uart0 = (void *)UART0_BASE;
++	enum {
++        	 /*CRU_PMU_CLKSEL_CON3*/
++        	UART0_PLL_SEL_SHIFT     = 14,
++        	UART0_PLL_SEL_MASK      = 3 << UART0_PLL_SEL_SHIFT,
++        	UART0_PLL_SEL_GPLL      = 0,
++        	UART0_PLL_SEL_24M,
++        	UART0_PLL_SEL_480M,
++        	UART0_PLL_SEL_NPLL,
++        	UART0_DIV_CON_SHIFT     = 0,
++        	UART0_DIV_CON_MASK      = 0x1f << UART0_DIV_CON_SHIFT,
++
++        	/*CRU_PMU_CLKSEL_CON4*/
++        	UART0_CLK_SEL_SHIFT     = 14,
++        	UART0_CLK_SEL_MASK      = 3 << UART0_PLL_SEL_SHIFT,
++        	UART0_CLK_SEL_UART0     = 0,
++        	UART0_CLK_SEL_UART0_NP5,
++        	UART0_CLK_SEL_UART0_FRAC,
++        	UART0_DIVNP5_SHIFT      = 0,
++        	UART0_DIVNP5_MASK       = 0x1f << UART0_DIVNP5_SHIFT,
++
++		};
++
++	/* uart_sel_clk default select 24MHz */
++        rk_clrsetreg(&pmucru->pmu_clksel_con[3],
++                     UART0_PLL_SEL_MASK | UART0_DIV_CON_MASK,
++                     UART0_PLL_SEL_24M << UART0_PLL_SEL_SHIFT | 0);
++        rk_clrsetreg(&pmucru->pmu_clksel_con[4],
++                     UART0_CLK_SEL_MASK,
++                     UART0_CLK_SEL_UART0 << UART0_CLK_SEL_SHIFT);
++	/* enable FIFO */
++        writel(0x1, &uart0->sfe);
++#else
++
++
+ 	static struct px30_cru * const cru = (void *)CRU_BASE;
+ 	static struct rk_uart * const uart = (void *)UART2_BASE;
+ 
+@@ -145,8 +191,43 @@ void board_debug_uart_init(void)
+ 
+ 	/* enable FIFO */
+ 	writel(0x1, &uart->sfe);
++#endif
++
+ #else
++
+ #ifdef CONFIG_SPL_BUILD
++
++#if defined(CONFIG_DEBUG_UART_BASE) && (CONFIG_DEBUG_UART_BASE == 0xff030000)
++//PMUGRF_GPIO0B_IOMUX
++//gpio0bl_iomux
++//px30_pmugrf
++//CRU_PMU_CLKSEL_CON3
++//CRU_PMU_CLKSEL_CON4
++//
++
++        static struct px30_pmugrf * const pmugrf = (void *)PMU_GRF_BASE;
++
++        /* PMUGRF_GPIO0B_IOMUX */
++        enum {
++                GPIO0B3_SHIFT           = 6,
++                GPIO0B3_MASK            = 0xf << GPIO0B3_SHIFT,
++                GPIO0B3_GPIO            = 0,
++                GPIO0B3_UART0_RX,
++                GPIO1D3_PMU_DEBUG1,
++
++                GPIO0B2_SHIFT           = 4,
++                GPIO0B2_MASK            = 0xf << GPIO0B2_SHIFT,
++                GPIO0B2_GPIO            = 0,
++                GPIO0B2_UART0_TX,
++                GPIO0B2_PMU_DEBUG0,
++        };
++
++
++	rk_clrsetreg(&pmugrf->gpio0bl_iomux,
++                     GPIO0B3_MASK | GPIO0B2_MASK,
++                     GPIO0B3_UART0_RX << GPIO0B3_SHIFT |
++                     GPIO0B2_UART0_TX << GPIO0B2_SHIFT);
++#else
+ 	/* GRF_GPIO1DL_IOMUX */
+ 	enum {
+ 		GPIO1D3_SHIFT		= 12,
+@@ -179,11 +260,17 @@ void board_debug_uart_init(void)
+ 		     GPIO1D3_UART2_RXM0 << GPIO1D3_SHIFT |
+ 		     GPIO1D2_UART2_TXM0 << GPIO1D2_SHIFT);
+ #endif
++#endif
++
++#if defined(CONFIG_DEBUG_UART_BASE) && (CONFIG_DEBUG_UART_BASE != 0xff030000)
+ 	/* Set channel C as UART2 input */
+ 	rk_clrsetreg(&grf->iofunc_con0,
+ 		     CON_IOMUX_UART2SEL_MASK,
+ 		     CON_IOMUX_UART2SEL_M0 << CON_IOMUX_UART2SEL_SHIFT);
+ #endif
++
++#endif
++
+ }
+ 
+ int set_armclk_rate(void)
+diff --git a/configs/evb-px30_defconfig b/configs/evb-px30_defconfig
+index f69bf0d..1683a05 100644
+--- a/configs/evb-px30_defconfig
++++ b/configs/evb-px30_defconfig
+@@ -93,8 +93,8 @@ CONFIG_SDRAM_COMMON_OSREG=y
+ CONFIG_SDRAM_COMMON_MSCH_PX30=y
+ CONFIG_DM_RESET=y
+ CONFIG_RKNAND=y
+-CONFIG_BAUDRATE=1500000
+-CONFIG_DEBUG_UART_BASE=0xFF160000
++CONFIG_BAUDRATE=115200
++CONFIG_DEBUG_UART_BASE=0xFF030000
+ CONFIG_DEBUG_UART_CLOCK=24000000
+ CONFIG_DEBUG_UART_SHIFT=2
+ CONFIG_DEBUG_UART_SKIP_INIT=y
+diff --git a/drivers/net/gmac_rockchip.c b/drivers/net/gmac_rockchip.c
+index 9007e4c..43eaaeb 100644
+--- a/drivers/net/gmac_rockchip.c
++++ b/drivers/net/gmac_rockchip.c
+@@ -681,6 +681,7 @@ static int gmac_rockchip_probe(struct udevice *dev)
+ 
+ 		break;
+ 	case PHY_INTERFACE_MODE_RMII:
++		printf("####PHY_INTERFACE_MODE_RMII####\n");
+ 		/* The commet is the same as RGMII mode */
+ 		if (!pdata->clock_input) {
+ 			rate = clk_set_rate(&clk, 50000000);
+@@ -711,6 +712,7 @@ static int gmac_rockchip_eth_start(struct udevice *dev)
+ 		(struct rk_gmac_ops *)dev_get_driver_data(dev);
+ 	int ret;
+ 
++	printf("##gmac_rockchip_eth_start##\n");
+ 	ret = designware_eth_init(priv, pdata->enetaddr);
+ 	if (ret)
+ 		return ret;
+@@ -720,7 +722,7 @@ static int gmac_rockchip_eth_start(struct udevice *dev)
+ 	ret = designware_eth_enable(priv);
+ 	if (ret)
+ 		return ret;
+-
++	printf("##gmac_rockchip_eth_start end##");
+ 	return 0;
+ }
+ 
+-- 
+1.9.1
+
