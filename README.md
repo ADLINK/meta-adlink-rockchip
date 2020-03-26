@@ -19,7 +19,7 @@
 
 **Note**: Login name is not required / password: **adlink123** 
 
-
+<br>
 
 ### Please refer to [wiki](https://github.com/ADLINK/meta-adlink-rockchip/wiki) for Yocto BSP building
 
