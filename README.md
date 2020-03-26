@@ -10,17 +10,24 @@
 
 <br />
 
+**thud Brancg details**
 
+| **Layer**            | ${BRANCH}  | **Git Commit Id**                        |
+| -------------------- | ---------- | ---------------------------------------- |
+| Poky                 | thud       | 8cd3ee6e1a50ad9f40466bcadb236c619c42ef19 |
+| meta-openembedded    | thud       | 446bd615fd7cb9bc7a159fe5c2019ed08d1a7a93 |
+| meta-rockchip        | yocto-next | 5b8997a5992204cb773a55dca9406c0f95a4d061 |
+| meta-adlink-rockchip | thud       | ebd480c8408ab386e14d32007b64c8c2886e279f |
 
-List of the current branch and Yocto Image
+<br />
 
-| **PX30 Yocto branch**                                        | **SD Card Image with xfce Desktop environment (carrier board: IPi-SMARC)** |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| [thud](https://github.com/ADLINK/meta-adlink-rockchip/tree/thud) (kernel version: **4.4**) | TBD |
+**Yocto Image for the quick evaluation**
+
+* SD Card Image with xfce Desktop environment (carrier board: IPi-SMARC): TBD
 
 **Note**: Login name is not required / password: **adlink123** 
 
-
+<br />
 
 ### Please refer to [wiki](https://github.com/ADLINK/meta-adlink-rockchip/wiki) for Yocto BSP building
 
