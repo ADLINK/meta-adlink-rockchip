@@ -12,7 +12,7 @@
 
 
 
-**Yocto Updated Branch (Zeus) details**
+**Zeus Branch details**
 
 | **Layer**            | **Git Branch** | **Git Commit Id**                         |
 | -------------------- | -------------- | ----------------------------------------- |
