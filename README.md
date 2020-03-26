@@ -10,7 +10,7 @@
 
 <br />
 
-**thud Brancg details**
+**Thud branch details**
 
 | **Layer**            | ${BRANCH}  | **Git Commit Id**                        |
 | -------------------- | ---------- | ---------------------------------------- |
