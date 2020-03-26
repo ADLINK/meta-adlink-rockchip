@@ -10,7 +10,7 @@
 
 <br />
 
-List of the current branch and Yocto Image
+**List of the current branch and Yocto Image**
 
 | **PX30 Yocto branch**                                        | **SD Card Image with xfce Desktop environment (carrier board: IPi-SMARC)** |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
