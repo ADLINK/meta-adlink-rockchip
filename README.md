@@ -22,16 +22,15 @@
 | meta-adlink-rockchip | zeus           | a1f957daa4280ae58e6f63a3103d64a3e5799ac0  |
 
 
+<br />
 
-**List of the current branch and Yocto Image**
+**Yocto Image for the quick evaluation**
 
-| **PX30 Yocto branch**                                        | **SD Card Image with xfce Desktop environment (carrier board: IPi-SMARC)** |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| [zeus](https://github.com/ADLINK/meta-adlink-rockchip/tree/zeus) (kernel version: **4.4**) | [download link](https://hq0epm0west0us0storage.blob.core.windows.net/development/LEC-PX30/Images/Yocto/v1.0.6-20200320/LEC-PX30-IPi-SMARC_Yocto-Zeus-v1.0_SD_20200320.zip) |
+* SD Card Image with xfce Desktop environment (carrier board: IPi-SMARC): [download link](https://hq0epm0west0us0storage.blob.core.windows.net/development/LEC-PX30/Images/Yocto/v1.0.6-20200320/LEC-PX30-IPi-SMARC_Yocto-Zeus-v1.0_SD_20200320.zip)
 
 **Note**: Login name is not required / password: **adlink123** 
 
-
+<br />
 
 ### Please refer to [wiki](https://github.com/ADLINK/meta-adlink-rockchip/wiki) for Yocto BSP building
 
