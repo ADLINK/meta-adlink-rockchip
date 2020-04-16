@@ -12,14 +12,15 @@
 
 **List of the current branch and Yocto Image**
 
-| **PX30 Yocto branch**                                        | **SD Card Image with xfce Desktop environment (carrier board: IPi-SMARC)** |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| [zeus](https://github.com/ADLINK/meta-adlink-rockchip/tree/zeus) (kernel version: **4.4**) | [download link](https://hq0epm0west0us0storage.blob.core.windows.net/development/LEC-PX30/Images/Yocto/v1.0.6-20200407/LEC-PX30-IPi-SMARC_Yocto-Zeus-v1.4_SD_20200407.zip) |
-| [thud](https://github.com/ADLINK/meta-adlink-rockchip/tree/thud) (kernel version: **4.4**) | [download link](https://hq0epm0west0us0storage.blob.core.windows.net/development/LEC-PX30/Images/Yocto/v1.0.5-20200226/LEC-PX30-IPi-SMARC_Yocto-thud-v1.0_SD_20200226.zip)                                                          |
+| **PX30 Yocto branch**                                        | **SD Card Image with xfce Desktop environment (carrier board: IPi-SMARC)** | **Image size** | 
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ---- |
+| [zeus](https://github.com/ADLINK/meta-adlink-rockchip/tree/zeus) (kernel version: **4.4**) | [download link](https://hq0epm0west0us0storage.blob.core.windows.net/development/LEC-PX30/Images/Yocto/v1.0.6-20200407/LEC-PX30-IPi-SMARC_Yocto-Zeus-v1.4_SD_20200407.zip) | 355MB |
+| [thud](https://github.com/ADLINK/meta-adlink-rockchip/tree/thud) (kernel version: **4.4**) | [download link](https://hq0epm0west0us0storage.blob.core.windows.net/development/LEC-PX30/Images/Yocto/v1.0.5-20200226/LEC-PX30-IPi-SMARC_Yocto-thud-v1.0_SD_20200226.zip)                                                          | 300MB |
 
 
 
-**Note**: Login name is not required / password: **adlink123** 
+**Note**: Login name/password are not required. 
+
 
 <br>
 
