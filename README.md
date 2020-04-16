@@ -12,7 +12,7 @@
 
 **Thud branch details**
 
-| **Layer**            | ${BRANCH}  | **Git Commit Id**                        |
+| **Layer**            | ${BRANCH}  | ${COMMIT_ID}                       |
 | -------------------- | ---------- | ---------------------------------------- |
 | Poky                 | thud       | 8cd3ee6e1a50ad9f40466bcadb236c619c42ef19 |
 | meta-openembedded    | thud       | 446bd615fd7cb9bc7a159fe5c2019ed08d1a7a93 |
@@ -23,7 +23,7 @@
 
 **Yocto Image for the quick evaluation**
 
-* SD Card Image with xfce Desktop environment (carrier board: IPi-SMARC, Image size: 355MB): [download link](https://hq0epm0west0us0storage.blob.core.windows.net/development/LEC-PX30/Images/Yocto/v1.0.5-20200226/LEC-PX30-IPi-SMARC_Yocto-thud-v1.0_SD_20200226.zip)
+* SD Card Image with xfce Desktop environment (carrier board: IPi-SMARC, image size: 355MB): [download link](https://hq0epm0west0us0storage.blob.core.windows.net/development/LEC-PX30/Images/Yocto/v1.0.5-20200226/LEC-PX30-IPi-SMARC_Yocto-thud-v1.0_SD_20200226.zip)
 
 **Note**: Login name/password are not required 
 
