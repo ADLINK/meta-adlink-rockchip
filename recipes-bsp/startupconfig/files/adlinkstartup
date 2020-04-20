@@ -55,3 +55,28 @@ StartupNotify=XFCE;
 Categories=X-XFCE;X-Xfce-Toplevel;" > /usr/share/applications/xfce4-session-logout.desktop
 
 
+if [ -x /usr/bin/startxfce4 ]; then
+     #removing unwanted applications
+   rm /usr/share/applications/xinput_calibrator.desktop
+fi 
+
+# Pulse audio configuration
+rm -rf /usr/lib/xfce4/panel/plugins/libpulseaudio-plugin.so
+cp -rf /home/root/rockchip_test/client.conf /etc/pulse/
+cp -rf /home/root/rockchip_test/pulse.conf /etc/dbus-1/system.d/
+cp -rf /home/root/rockchip_test/pulseaudio.service /etc/systemd/system/
+
+
+sed -i 's/module-native-protocol-unix/module-native-protocol-unix auth-anonymous=1/g' /etc/pulse/system.pa
+
+systemctl --system enable pulseaudio.service
+
+systemctl --system start pulseaudio.service
+
+
+#Load Pulse audio modules
+pactl load-module module-bluetooth-policy 
+
+pactl load-module module-bluetooth-discover
+
+

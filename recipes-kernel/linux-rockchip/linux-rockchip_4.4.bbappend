@@ -20,7 +20,8 @@ SRC_URI += " \
         file://0005-Modified-compatible-property-as-per-target-kernel-dt.patch \
         file://0006-Added-Sx150x-gpio-expander-suppport-for-LEC-PX30-A2.patch \
         file://0007-Added-SPI-chip-select-enable-disable-support-for-SPI.patch \
+	file://0008-Modified-Boot-Arguments-to-mount-fileystem-from-SD-c.patch \
+	file://0009-Added-Edimax-USB-WiFi-dongls-as-USB-evice.patch \
+	file://0010-Kernel-Restart-Fix.patch \
 "
 
-# Comment the below line to mount file system from eMMC
-SRC_URI += "file://0008-Modified-Boot-Arguments-to-mount-fileystem-from-SD-c.patch"

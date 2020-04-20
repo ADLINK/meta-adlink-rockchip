@@ -7,6 +7,7 @@ SRC_URI = "\
     file://adlinkstartup \
     file://adlinkstartup.service \
     file://rockchip_test \
+    file://rtl_bt \
 "
 
 inherit pkgconfig systemd 
@@ -31,12 +32,23 @@ do_install() {
        install -m 0755 "${WORKDIR}/rockchip_test/eth0MACUpdate.sh" "${D}/home/root/rockchip_test/"
        install -m 0755 "${WORKDIR}/rockchip_test/eth0EEPROMUpdate.sh" "${D}/home/root/rockchip_test/"
        install -m 0755 "${WORKDIR}/rockchip_test/eth1EEPROMUpdate.sh" "${D}/home/root/rockchip_test/"
+       install -m 0755 "${WORKDIR}/rockchip_test/client.conf" "${D}/home/root/rockchip_test/"
+       install -m 0755 "${WORKDIR}/rockchip_test/pulse.conf" "${D}/home/root/rockchip_test/"
+       install -m 0755 "${WORKDIR}/rockchip_test/pulseaudio.service" "${D}/home/root/rockchip_test/"
+       install -m 0755 "${WORKDIR}/rockchip_test/wifi_bt.sh" "${D}/home/root/rockchip_test/"
        
        install -d "${D}${sbindir}"
        install -m 0755 "${WORKDIR}/adlinkstartup" "${D}${sbindir}/adlinkstartup"
 
        install -d "${D}${systemd_unitdir}/system"
        install -m 0644 "${WORKDIR}/adlinkstartup.service" "${D}${systemd_unitdir}/system/adlinkstartup.service"
+
+       install -d "${D}/lib/firmware/rtl_bt"
+       install -m 0755 "${WORKDIR}/rtl_bt/rtl8723b_config" "${D}/lib/firmware/rtl_bt/"
+       install -m 0755 "${WORKDIR}/rtl_bt/rtl8723b_config.bin" "${D}/lib/firmware/rtl_bt/"
+       install -m 0755 "${WORKDIR}/rtl_bt/rtl8723b_fw" "${D}/lib/firmware/rtl_bt/"
+       install -m 0755 "${WORKDIR}/rtl_bt/rtl8723b_fw.bin" "${D}/lib/firmware/rtl_bt/"
+
     fi
 }
 
@@ -44,6 +56,7 @@ FILES_${PN} += "\
     ${systemd_unitdir}/system-preset \
     ${systemd_unitdir}/system/adlinkstartup.service \
     /home/root/rockchip_test \
+    /lib/firmware/rtl_bt \
 "
 
 

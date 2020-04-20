@@ -14,12 +14,12 @@
 
 **Zeus Branch details**
 
-| **Layer**            | **Git Branch** | **Git Commit Id**                         |
-| -------------------- | -------------- | ----------------------------------------- |
-| Poky                 | zeus           | f9ef210967ab34168d4a24930987dc0731baf56f  |
-| meta-openembedded    | zeus           | bb65c27a772723dfe2c15b5e1b27bcc1a1ed884c  |
-| meta-rockchip        | yocto-next     | 5b8997a5992204cb773a55dca9406c0f95a4d061a |
-| meta-adlink-rockchip | zeus           | a1f957daa4280ae58e6f63a3103d64a3e5799ac0  |
+| **Layer**            | **Git Branch** | **Git Commit Id**                        |
+| -------------------- | -------------- | ---------------------------------------- |
+| Poky                 | zeus           | f9ef210967ab34168d4a24930987dc0731baf56f |
+| meta-openembedded    | zeus           | bb65c27a772723dfe2c15b5e1b27bcc1a1ed884c |
+| meta-rockchip        | yocto-next     | 5b8997a5992204cb773a55dca9406c0f95a4d061 |
+| meta-adlink-rockchip | zeus           | a1f957daa4280ae58e6f63a3103d64a3e5799ac0 |
 
 
 <br />

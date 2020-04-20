@@ -1,0 +1,24 @@
+From 6660fb38da9ba593e127ab53befdb7c1e4f9cdfe Mon Sep 17 00:00:00 2001
+From: Dineshkumar V <dineshkumar.varadarajan@adlinktech.com>
+Date: Wed, 1 Apr 2020 18:08:32 +0530
+Subject: [PATCH 9/9] Added Edimax USB WiFi dongls as USB evice
+
+---
+ drivers/net/wireless/rockchip_wlan/rtl8723bu/os_dep/linux/usb_intf.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/drivers/net/wireless/rockchip_wlan/rtl8723bu/os_dep/linux/usb_intf.c b/drivers/net/wireless/rockchip_wlan/rtl8723bu/os_dep/linux/usb_intf.c
+index f16e69e8..cae61e2 100755
+--- a/drivers/net/wireless/rockchip_wlan/rtl8723bu/os_dep/linux/usb_intf.c
++++ b/drivers/net/wireless/rockchip_wlan/rtl8723bu/os_dep/linux/usb_intf.c
+@@ -194,6 +194,7 @@ static struct usb_device_id rtw_usb_id_tbl[] ={
+ 	//*=== Realtek demoboard ===*/
+ 	{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDER_ID_REALTEK, 0xB720,0xff,0xff,0xff),.driver_info = RTL8723B}, /* 8723BU 1*1 */
+ 	//{USB_DEVICE(USB_VENDER_ID_REALTEK, 0xB720),.driver_info = RTL8723B}, /* 8723BU */
++	 {USB_DEVICE(0x7392, 0xA611),.driver_info = RTL8723B}, /* Edimax - Edimax */
+ #endif
+ 
+ #ifdef CONFIG_RTL8703B
+-- 
+2.7.4
+
