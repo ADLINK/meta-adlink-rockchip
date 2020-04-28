@@ -67,7 +67,14 @@ cp -rf /home/root/rockchip_test/pulse.conf /etc/dbus-1/system.d/
 cp -rf /home/root/rockchip_test/pulseaudio.service /etc/systemd/system/
 
 
-sed -i 's/module-native-protocol-unix/module-native-protocol-unix auth-anonymous=1/g' /etc/pulse/system.pa
+cat /etc/pulse/system.pa | grep -i auth
+if [ $? -ne 0 ]; then
+   sed -i 's/module-native-protocol-unix/module-native-protocol-unix auth-anonymous=1/g' /etc/pulse/system.pa
+fi
+
+systemctl --system stop pulseaudio.service
+
+systemctl --system disable pulseaudio.service
 
 systemctl --system enable pulseaudio.service
 
@@ -78,5 +85,6 @@ systemctl --system start pulseaudio.service
 pactl load-module module-bluetooth-policy 
 
 pactl load-module module-bluetooth-discover
+
 
 

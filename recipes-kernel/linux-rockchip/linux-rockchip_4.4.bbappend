@@ -23,5 +23,6 @@ SRC_URI += " \
 	file://0008-Modified-Boot-Arguments-to-mount-fileystem-from-SD-c.patch \
 	file://0009-Added-Edimax-USB-WiFi-dongls-as-USB-evice.patch \
 	file://0010-Kernel-Restart-Fix.patch \
+	file://0011-Loading-BT-firmware-after-rootfs-mount.patch \
 "
 

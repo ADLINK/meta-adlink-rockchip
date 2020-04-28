@@ -1,0 +1,107 @@
+From 11f2f4179ca017053df7d37f354f000c19762464 Mon Sep 17 00:00:00 2001
+From: Dineshkumar V <dineshkumar.varadarajan@adlinktech.com>
+Date: Wed, 22 Apr 2020 12:57:08 +0530
+Subject: [PATCH 11/11] Loading BT firmware after rootfs mount
+
+---
+ drivers/base/firmware_class.c |  9 +++++++++
+ include/linux/init.h          |  1 +
+ init/main.c                   | 29 ++++++++++++++++++++++++++++-
+ 3 files changed, 38 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/base/firmware_class.c b/drivers/base/firmware_class.c
+index ccfd268..8e10fce 100644
+--- a/drivers/base/firmware_class.c
++++ b/drivers/base/firmware_class.c
+@@ -29,6 +29,7 @@
+ #include <linux/syscore_ops.h>
+ #include <linux/reboot.h>
+ #include <linux/security.h>
++#include <linux/init.h>
+ 
+ #include <generated/utsrelease.h>
+ 
+@@ -333,6 +334,14 @@ static int fw_get_filesystem_firmware(struct device *device,
+ 	if (!path)
+ 		return -ENOMEM;
+ 
++	/* Before any file access we have to wait for rootfs.
++
++	   In case of built-in module we can race with kernel init
++
++	   thread, which has not mounted rootfs yet */
++
++	wait_for_rootfs();
++
+ 	for (i = 0; i < ARRAY_SIZE(fw_path); i++) {
+ 		struct file *file;
+ 
+diff --git a/include/linux/init.h b/include/linux/init.h
+index 3561ea3..ba5cd49 100644
+--- a/include/linux/init.h
++++ b/include/linux/init.h
+@@ -148,6 +148,7 @@ void setup_arch(char **);
+ void prepare_namespace(void);
+ void __init load_default_modules(void);
+ int __init init_rootfs(void);
++void wait_for_rootfs(void);
+ 
+ #ifdef CONFIG_DEBUG_RODATA
+ void mark_rodata_ro(void);
+diff --git a/init/main.c b/init/main.c
+index 4b517a6..72ed8b1 100644
+--- a/init/main.c
++++ b/init/main.c
+@@ -966,6 +966,9 @@ static inline void mark_readonly(void)
+ }
+ #endif
+ 
++
++
++
+ static int __ref kernel_init(void *unused)
+ {
+ 	int ret;
+@@ -1011,6 +1014,27 @@ static int __ref kernel_init(void *unused)
+ 	      "See Linux Documentation/init.txt for guidance.");
+ }
+ 
++
++static DECLARE_WAIT_QUEUE_HEAD(rootfs_waitq);
++static bool rootfs_mounted;
++
++void wait_for_rootfs(void)
++{
++	/* Avoid waiting for ourselves */
++	if (WARN_ON(is_global_init(current)))
++		return;
++	else
++		wait_event(rootfs_waitq, rootfs_mounted);
++}
++
++EXPORT_SYMBOL(wait_for_rootfs);
++
++static inline void wake_up_rootfs_waiters(void)
++{
++	rootfs_mounted = true;
++	wake_up_all(&rootfs_waitq);
++}
++
+ static noinline void __init kernel_init_freeable(void)
+ {
+ 	/*
+@@ -1071,7 +1095,10 @@ static noinline void __init kernel_init_freeable(void)
+ 	 * Ok, we have completed the initial bootup, and
+ 	 * we're essentially up and running. Get rid of the
+ 	 * initmem segments and start the user-mode stuff..
+-	 *
++         */ 
++	wake_up_rootfs_waiters();
++
++ 	/*
+ 	 * rootfs is available now, try loading the public keys
+ 	 * and default modules
+ 	 */
+-- 
+2.7.4
+
