@@ -26,7 +26,7 @@
 
 **Yocto Image for the quick evaluation**
 
-* SD Card Image with xfce Desktop environment (carrier board: IPi-SMARC, image sisze: 355MB): [download link](https://hq0epm0west0us0storage.blob.core.windows.net/public/SMARC/LEC-PX30/Images/Yocto/LEC-PX30-IPi-SMARC_Yocto-Zeus-v1.3_SD_20200504.zip)
+* SD Card Image with xfce Desktop environment (carrier board: IPi-SMARC, image sisze: 1.8GB): [download link](https://hq0epm0west0us0storage.blob.core.windows.net/public/SMARC/LEC-PX30/Images/Yocto/LEC-PX30-IPi-SMARC_Yocto-Zeus-v1.3_SD_20200504.zip)
 
 **Note**: Login name/password are not required
 
