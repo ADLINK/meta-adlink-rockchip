@@ -1,5 +1,5 @@
-SUMMARY = "ADLINK v4l2 test application"
-DESCRIPTION = "Camera RAW data capture tool"
+SUMMARY = "ADLINK SPI test application"
+DESCRIPTION = "SPI Interface Testing"
 LICENSE = "CLOSED"
 
 
