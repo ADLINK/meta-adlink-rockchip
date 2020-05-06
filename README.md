@@ -20,7 +20,10 @@
 | meta-openembedded    | zeus           | bb65c27a772723dfe2c15b5e1b27bcc1a1ed884c |
 | meta-rockchip        | yocto-next     | 5b8997a5992204cb773a55dca9406c0f95a4d061 |
 | meta-adlink-rockchip | zeus           | a1f957daa4280ae58e6f63a3103d64a3e5799ac0 |
-
+| meta-browser         | zeus           | 830ef438e81ba5fc915b1855e69f02b2c286b21a |
+| meta-clang           | zeus           | 81ba160c95b12b2922f99b60bef25ab37a5e2f0e |
+| meta-rust            | master         | a012a1027defe28495f06ed522a7a82bdd59a610 |
+ 
 
 <br />
 
