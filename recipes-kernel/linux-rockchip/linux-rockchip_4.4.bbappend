@@ -24,5 +24,6 @@ SRC_URI += " \
 	file://0009-Added-Edimax-USB-WiFi-dongls-as-USB-evice.patch \
 	file://0010-Kernel-Restart-Fix.patch \
 	file://0011-Loading-BT-firmware-after-rootfs-mount.patch \
+	file://0012-px30-ttyfiq2ttys.patch \
 "
 
