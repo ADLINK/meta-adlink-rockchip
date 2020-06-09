@@ -2156,7 +2156,7 @@ CONFIG_VIDEO_ROCKCHIP_RGA=y
 #
 # Camera sensor devices
 #
-# CONFIG_VIDEO_IMX219 is not set
+CONFIG_VIDEO_IMX219=y
 # CONFIG_VIDEO_IMX258 is not set
 # CONFIG_VIDEO_IMX317 is not set
 # CONFIG_VIDEO_IMX323 is not set

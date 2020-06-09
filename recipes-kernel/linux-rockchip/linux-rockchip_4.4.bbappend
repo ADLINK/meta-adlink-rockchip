@@ -25,5 +25,6 @@ SRC_URI += " \
 	file://0010-Kernel-Restart-Fix.patch \
 	file://0011-Loading-BT-firmware-after-rootfs-mount.patch \
 	file://0012-px30-ttyfiq2ttys.patch \
+	file://0013-Fix-Sony-imx219-camera-sensor-greenish-colour-issue.patch \
 "
 

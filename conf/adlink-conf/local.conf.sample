@@ -155,4 +155,12 @@ CONF_VERSION = "1"
 ######################################################################################
 BBMASK = "meta-rockchip/recipes-bsp/u-boot/u-boot%.bbappend"
 
+# IMX219 Sony camera
+LICENSE_FLAGS_WHITELIST = "commercial"
+PACKAGECONFIG_append_pn-gstreamer1.0-plugins-bad = " kms"
+IMAGE_INSTALL_append += " gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad gstreamer1.0-plugins-good gstreamer1.0-libav gstreamer1.0-rockchip"
 
+IMAGE_INSTALL_append += " rockchip-rkisp-server rockchip-rkisp-iqfiles"
+
+# android-tools
+IMAGE_INSTALL_append += " android-tools"
