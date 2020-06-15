@@ -164,3 +164,11 @@ IMAGE_INSTALL_append += " rockchip-rkisp-server rockchip-rkisp-iqfiles"
 
 # android-tools
 IMAGE_INSTALL_append += " android-tools"
+
+DISTRO_FEATURES_remove += " wayland" 
+DISTRO_FEATURES_append += " x11" 
+#IMAGE_FEATURES_append += " x11-base" 
+IMAGE_INSTALL_append += " xf86-video-modesetting xserver-xorg-module-exa"
+
+# For mali gpu 
+DISTRO_FEATURES_append += " egl"
