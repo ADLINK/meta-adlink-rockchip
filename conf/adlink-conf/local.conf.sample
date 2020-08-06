@@ -171,3 +171,6 @@ IMAGE_INSTALL_append += " xf86-video-modesetting xserver-xorg-module-exa"
 
 # For mali gpu 
 DISTRO_FEATURES_append += " egl"
+
+#Uncomment the below line to enable the serial port debugging FIQ driver 
+FIQ_DEBUGGER = "enable"
