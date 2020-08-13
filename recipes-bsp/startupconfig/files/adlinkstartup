@@ -90,11 +90,28 @@ systemctl --system enable pulseaudio.service
 
 systemctl --system start pulseaudio.service
 
+systemctl enable serial-getty@ttyGS0.service
+
+systemctl start serial-getty@ttyGS0.service
+
+systemctl stop serial-getty@ttyS0.service
 
 #Load Pulse audio modules
 pactl load-module module-bluetooth-policy 
 
 pactl load-module module-bluetooth-discover
+
+
+#Load sema drivers
+
+modprobe adl_bmc
+modprobe adl_bmc_bklight
+modprobe adl_bmc_boardinfo
+modprobe adl_bmc_i2c
+modprobe adl_bmc_nvmem
+modprobe adl_bmc_wdt
+modprobe adl_bmc_hwmon
+modprobe adl_bmc_vm
 
 
 
