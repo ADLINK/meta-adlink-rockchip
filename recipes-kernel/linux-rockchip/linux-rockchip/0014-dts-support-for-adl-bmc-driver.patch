@@ -1,0 +1,30 @@
+From 208026d598072e598b3db0d7f3168f903087452b Mon Sep 17 00:00:00 2001
+From: Dineshkumar V <dineshkumar.varadarajan@adlinktech.com>
+Date: Thu, 25 Jun 2020 09:23:22 +0530
+Subject: [PATCH] dts support for adl-bmc driver
+
+---
+ arch/arm64/boot/dts/rockchip/px30-evb-ddr3-v10-linux.dts | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/rockchip/px30-evb-ddr3-v10-linux.dts b/arch/arm64/boot/dts/rockchip/px30-evb-ddr3-v10-linux.dts
+index b0d76eb..3aaa218 100644
+--- a/arch/arm64/boot/dts/rockchip/px30-evb-ddr3-v10-linux.dts
++++ b/arch/arm64/boot/dts/rockchip/px30-evb-ddr3-v10-linux.dts
+@@ -936,6 +936,13 @@
+ 		polarity = <0x0>;
+ 	};
+ 
++	adl-bmc@28{
++		compatible = "adl-bmc";
++		reg = <0x28>;
++		#address-cells = <1>;
++		#size-cells = <0>;
++	};
++
+ 	ads1115@48{
+ 		compatible = "ti,ads1115";
+ 		reg = <0x48>;
+-- 
+2.7.4
+
