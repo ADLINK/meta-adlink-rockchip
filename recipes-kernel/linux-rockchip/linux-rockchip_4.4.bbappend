@@ -24,7 +24,8 @@ SRC_URI += " \
 	file://0009-Added-Edimax-USB-WiFi-dongls-as-USB-evice.patch \
 	file://0010-Kernel-Restart-Fix.patch \
 	file://0011-Loading-BT-firmware-after-rootfs-mount.patch \
-	file://0012-px30-ttyfiq2ttys.patch \
 	file://0013-Fix-Sony-imx219-camera-sensor-greenish-colour-issue.patch \
+ 	${@bb.utils.contains('FIQ_DEBUGGER', 'enable', 'file://0012-px30-ttyfiq2ttys.patch ', 'file://0013-Removed-ttyFIQ-Interchanges-UART0-and-UART2-port-lin.patch', d)} \
+        file://0014-dts-support-for-adl-bmc-driver.patch \
 "
 
