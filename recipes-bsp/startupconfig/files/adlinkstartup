@@ -94,7 +94,7 @@ systemctl enable serial-getty@ttyGS0.service
 
 systemctl start serial-getty@ttyGS0.service
 
-systemctl stop serial-getty@ttyS0.service
+#systemctl stop serial-getty@ttyS0.service
 
 #Load Pulse audio modules
 pactl load-module module-bluetooth-policy 

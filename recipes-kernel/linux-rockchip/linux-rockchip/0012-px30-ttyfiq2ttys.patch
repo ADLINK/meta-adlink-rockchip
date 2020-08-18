@@ -32,7 +32,7 @@ index 10c981af241f..61a2d31f2eff 100755
  #endif
  
 -	pdev->name = "fiq_debugger";
-+	pdev->name = "ff030000(fiq_debugger)";
++	pdev->name = "ff160000(fiq_debugger)";
  	pdev->id = rk_fiq_debugger_id++;
  	pdev->dev.platform_data = &t->pdata;
  	pdev->resource = res;
@@ -41,7 +41,7 @@ index 10c981af241f..61a2d31f2eff 100755
  	}
  
 -	pdev->name = "fiq_debugger";
-+	pdev->name = "ff030000(fiq_debugger)";
++	pdev->name = "ff160000(fiq_debugger)";
  	pdev->id = rk_fiq_debugger_id++;
  	pdev->dev.platform_data = &t->pdata;
  	if (platform_device_register(pdev)) {
@@ -81,7 +81,7 @@ index 46001784e745..1767462e2b2e 100644
  	.probe	= fiq_debugger_probe,
  	.driver	= {
 -		.name	= "fiq_debugger",
-+		.name   = "ff030000(fiq_debugger)",
++		.name   = "ff160000(fiq_debugger)",
  		.pm	= &fiq_debugger_dev_pm_ops,
  	},
  };
