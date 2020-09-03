@@ -1,0 +1,13 @@
+diff --git a/mpp/codec/dec/mpg4/mpg4d_api.c b/mpp/codec/dec/mpg4/mpg4d_api.c
+index aa9e7be2..2de2a770 100644
+--- a/mpp/codec/dec/mpg4/mpg4d_api.c
++++ b/mpp/codec/dec/mpg4/mpg4d_api.c
+@@ -90,7 +90,7 @@ static MPP_RET mpg4d_init(void *dec, ParserCfg *cfg)
+     p->frame_slots  = cfg->frame_slots;
+     p->packet_slots = cfg->packet_slots;
+     p->task_count   = cfg->task_count = 2;
+-    p->need_split   = 1;//cfg->need_split;
++    p->need_split   = cfg->need_split;
+     p->internal_pts = cfg->internal_pts;
+     p->stream       = stream;
+     p->stream_size  = stream_size;
