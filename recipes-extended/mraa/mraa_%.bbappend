@@ -6,6 +6,7 @@ SRCREV = "e15ce6fbc76148ba8835adc92196b0d0a3f245e7"
 
 SRC_URI += " \
         file://0001-Added-Test-applications-support.patch \
+	file://0001-Corrected-UART-Physical-address.patch \
 "
 
 SRC_URI[md5sum] = "84d7bb70c7a3a8f1f56e38fedda10399"
