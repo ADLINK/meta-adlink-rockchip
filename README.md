@@ -8,8 +8,19 @@
 | :----------------------------------------------------------: | :----------------------------------------------------------- | ------------------------------------------------------------ |
 | <img src="https://cdn.adlinktech.com/webupd/products/images/1790/LEC-PX30_A2_F.jpg" width="200"/> | **LEC-PX30** ([More details](https://www.adlinktech.com/Products/Computer_on_Modules/SMARC/LEC-PX30?lang=en))  <br />     SMARC Short Size Module with <br />Rockchip PX30 Quad-Core ARM Cortex A35 | [- zeus](https://github.com/ADLINK/meta-adlink-rockchip/tree/zeus#zeus-branch-details)<br>[- thud](https://github.com/ADLINK/meta-adlink-rockchip/tree/thud#thud-branch-details) |
 
-<br />
+<br>
 
+#### How to build Yocto Image
+
+* see [documentation](https://github.com/ADLINK/meta-adlink-rockchip/wiki/01.-Build-Yocto-Image-on-LEC-PX30-with-IPi-SMARC) for more details.
+
+#### How to flash image to your storage**
+
+* [Boot from SD card](https://github.com/ADLINK/meta-adlink-rockchip/wiki/02.-How-to-flash-Image-into-SD-Card)
+
+<br>
+
+<br>
 
 
 #### Zeus Branch details
@@ -37,11 +48,7 @@
   1. Login name/password are not required
   2. root password: **adlink123**
 
-<br />
-
-### Please refer to [wiki](https://github.com/ADLINK/meta-adlink-rockchip/wiki) for Yocto BSP building
-
-<br>
+ 
 <br>
 
 Please feel free to send us (email: ryanzj.huang@adlinktech.com) patches for this layer or report any bugs found in this layer. 
