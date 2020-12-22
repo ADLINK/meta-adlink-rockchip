@@ -4,9 +4,9 @@
 ### Supported Hardware
 
 
-|                       SMARC Module                       | Description                                                  |
-| :------------------------------------------------------: | :----------------------------------------------------------- |
-| <img src="https://cdn.adlinktech.com/webupd/products/images/1790/LEC-PX30_A2_F.jpg" width="200"/> | **LEC-PX30** ([More details](https://www.adlinktech.com/Products/Computer_on_Modules/SMARC/LEC-PX30?lang=en))  <br />     SMARC Short Size Module with Rockchip PX30 Quad-Core ARM Cortex A35<br /> |
+|                         SMARC Module                         | Description                                                  | Yocto images                                                 |
+| :----------------------------------------------------------: | :----------------------------------------------------------- | ------------------------------------------------------------ |
+| <img src="https://cdn.adlinktech.com/webupd/products/images/1790/LEC-PX30_A2_F.jpg" width="200"/> | **LEC-PX30** ([More details](https://www.adlinktech.com/Products/Computer_on_Modules/SMARC/LEC-PX30?lang=en))  <br />     SMARC Short Size Module with <br />Rockchip PX30 Quad-Core ARM Cortex A35 | [- zeus](https://github.com/ADLINK/meta-adlink-rockchip/tree/zeus#zeus-branch-details)<br>[- thud](https://github.com/ADLINK/meta-adlink-rockchip/tree/thud#thud-branch-details) |
 
 <br />
 
@@ -24,7 +24,7 @@
 | meta-browser         | zeus           | 830ef438e81ba5fc915b1855e69f02b2c286b21a |
 | meta-clang           | zeus           | 81ba160c95b12b2922f99b60bef25ab37a5e2f0e |
 | meta-rust            | master         | a012a1027defe28495f06ed522a7a82bdd59a610 |
- 
+
   
 
 <br />
@@ -43,7 +43,6 @@
 
 <br>
 <br>
-
 
 Please feel free to send us (email: ryanzj.huang@adlinktech.com) patches for this layer or report any bugs found in this layer. 
 <br> For hardware support, please contact your local representative.
