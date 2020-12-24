@@ -31,7 +31,7 @@
 
 #### Zeus Branch details
 
-| **Layer**            | **Git Branch** | **Git Commit Id**                        |
+| **Layer**            | **Git Branch - ${BRANCH}** | **Git Commit Id - ${COMMIT_ID}**                 |
 | -------------------- | -------------- | ---------------------------------------- |
 | Poky                 | zeus           | f9ef210967ab34168d4a24930987dc0731baf56f |
 | meta-openembedded    | zeus           | bb65c27a772723dfe2c15b5e1b27bcc1a1ed884c |
