@@ -8,10 +8,9 @@
 | :----------------------------------------------------------: | :----------------------------------------------------------- | ------------------------------------------------------------ |
 | <img src="https://cdn.adlinktech.com/webupd/products/images/1790/LEC-PX30_A2_F.jpg" width="200"/> | **LEC-PX30** ([More details](https://www.adlinktech.com/Products/Computer_on_Modules/SMARC/LEC-PX30?lang=en))  <br />     SMARC Short Size Module with <br />Rockchip PX30 Quad-Core ARM Cortex A35 | [click here](https://github.com/ADLINK/meta-adlink-rockchip/tree/zeus#zeus-branch-details) <br>with xfce desktop + MRAA/UPM <br>on I-Pi SMARC carrier board<br>(image size: 1.8 GB) |
 
- **Note**: 
-
-    1. Login name/password are not required
-    2. root password: **adlink123**
+**Note**: 
+1. Login name/password are not required
+2. root password: **adlink123**
 
 
 
