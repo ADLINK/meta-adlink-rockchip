@@ -41,6 +41,7 @@
 | meta-browser         | zeus           | 830ef438e81ba5fc915b1855e69f02b2c286b21a |
 | meta-clang           | zeus           | 81ba160c95b12b2922f99b60bef25ab37a5e2f0e |
 | meta-rust            | master         | a012a1027defe28495f06ed522a7a82bdd59a610 |
+| meta-python2         | zeus           | 4400f9155ec193d028208cf0c66aeed2ba2b00ab |
 
  
 
