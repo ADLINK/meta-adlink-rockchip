@@ -13,7 +13,6 @@ BBLAYERS ?= " \
   ${TOPDIR}/../meta-openembedded/meta-xfce \
   ${TOPDIR}/../meta-openembedded/meta-gnome \
   ${TOPDIR}/../meta-openembedded/meta-multimedia \
-  ${TOPDIR}/../meta-openembedded/meta-python \
   ${TOPDIR}/../meta-openembedded/meta-networking \
   ${TOPDIR}/../meta-rockchip \
   ${TOPDIR}/../meta-adlink-rockchip \
@@ -21,4 +20,5 @@ BBLAYERS ?= " \
   ${TOPDIR}/../meta-browser \
   ${TOPDIR}/../meta-clang \
   ${TOPDIR}/../meta-rust \
+  ${TOPDIR}/../meta-python2 \  
 "
