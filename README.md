@@ -35,7 +35,7 @@
 | -------------------- | -------------- | ---------------------------------------- |
 | Poky                 | zeus           | f9ef210967ab34168d4a24930987dc0731baf56f |
 | meta-openembedded    | zeus           | bb65c27a772723dfe2c15b5e1b27bcc1a1ed884c |
-| meta-rockchip        | yocto-next     | a17885ff8363816f928e4c62ae34303f6cdd44a4 |
+| meta-rockchip        | yocto-next     | d571e890e0f7ed28fa5a6f72cfe42eaca31352fb |
 | meta-adlink-rockchip | zeus           | 03720fd03020ebf33f696a1699989fde072a0994 |
 | meta-adlink-sema     | sema4.0        | 2151d926328742ff577afd055f15be0a6397a644 |
 | meta-browser         | zeus           | 830ef438e81ba5fc915b1855e69f02b2c286b21a |
