@@ -174,3 +174,6 @@ DISTRO_FEATURES_append += " egl"
 
 #Uncomment the below line to enable the serial port debugging FIQ driver 
 #FIQ_DEBUGGER = "enable"
+
+#uncomment the below line to enable the chromium 
+#IMAGE_INSTALL_append += " chromium-x11"
