@@ -18,8 +18,5 @@ BBLAYERS ?= " \
   ${TOPDIR}/../meta-rockchip \
   ${TOPDIR}/../meta-adlink-rockchip \
   ${TOPDIR}/../meta-adlink-sema \
-  ${TOPDIR}/../meta-browser \
-  ${TOPDIR}/../meta-clang \
-  ${TOPDIR}/../meta-rust \
   ${TOPDIR}/../meta-python2 \  
 "
