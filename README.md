@@ -38,9 +38,6 @@
 | meta-rockchip        | yocto-next     | d571e890e0f7ed28fa5a6f72cfe42eaca31352fb |
 | meta-adlink-rockchip | zeus           | 3040d1e34b0409950cf9f57d588e9694643b4b73 |
 | meta-adlink-sema     | sema4.0        | 2151d926328742ff577afd055f15be0a6397a644 |
-| meta-browser         | zeus           | 830ef438e81ba5fc915b1855e69f02b2c286b21a |
-| meta-clang           | zeus           | 81ba160c95b12b2922f99b60bef25ab37a5e2f0e |
-| meta-rust            | master         | a012a1027defe28495f06ed522a7a82bdd59a610 |
 | meta-python2         | zeus           | 4400f9155ec193d028208cf0c66aeed2ba2b00ab |
 
  
