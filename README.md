@@ -35,7 +35,7 @@
 | Poky                 | thud       | 8cd3ee6e1a50ad9f40466bcadb236c619c42ef19 |
 | meta-openembedded    | thud       | 446bd615fd7cb9bc7a159fe5c2019ed08d1a7a93 |
 | meta-rockchip        | yocto-next | 5b8997a5992204cb773a55dca9406c0f95a4d061 |
-| meta-adlink-rockchip | thud       | 12b2d2206adba2ef1ce357cd88d1c0b49d1b9e8b |
+| meta-adlink-rockchip | thud       | c7656f25377e7705f4d5c3a20e5cddd5ec8102ee |
 | meta-adlink-sema     | sema4.0    | 2151d926328742ff577afd055f15be0a6397a644 |
 
 
