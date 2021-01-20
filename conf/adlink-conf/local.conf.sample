@@ -177,3 +177,5 @@ DISTRO_FEATURES_append += " egl"
 
 #uncomment the below line to enable the chromium 
 #IMAGE_INSTALL_append += " chromium-x11"
+
+CORE_IMAGE_EXTRA_INSTALL += "ssh"

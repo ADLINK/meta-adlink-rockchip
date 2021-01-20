@@ -1,6 +1,4 @@
-
-
-SRCREV = "cf36da17e7b90e6c420c0d50efa1abe79ab5e19c"
+SRCREV = "56c8b14f39fca343998a29b5ade032983464eb34"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
