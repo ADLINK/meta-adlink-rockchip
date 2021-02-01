@@ -6,6 +6,7 @@ LICENSE = "CLOSED"
 SRC_URI = "\
     file://adlinkstartup \
     file://adlinkstartup.service \
+    file://disablevim.service \
     file://rockchip_test \
     file://rtl_bt \
 "
@@ -13,7 +14,7 @@ SRC_URI = "\
 inherit pkgconfig systemd 
 
 SYSTEMD_PACKAGES += "${PN}"
-SYSTEMD_SERVICE_${PN} = "adlinkstartup.service"
+SYSTEMD_SERVICE_${PN} = "adlinkstartup.service disablevim.service"
 SYSTEMD_AUTO_ENABLE_${PN} = "enable"
 
 INITSCRIPT_NAME = "adlinkstartup"
@@ -44,6 +45,7 @@ do_install() {
 
        install -d "${D}${systemd_unitdir}/system"
        install -m 0644 "${WORKDIR}/adlinkstartup.service" "${D}${systemd_unitdir}/system/adlinkstartup.service"
+       install -m 0644 "${WORKDIR}/disablevim.service" "${D}${systemd_unitdir}/system/disablevim.service"
 
        install -d "${D}/lib/firmware/rtl_bt"
        install -m 0755 "${WORKDIR}/rtl_bt/rtl8723b_config" "${D}/lib/firmware/rtl_bt/"
@@ -57,6 +59,7 @@ do_install() {
 FILES_${PN} += "\
     ${systemd_unitdir}/system-preset \
     ${systemd_unitdir}/system/adlinkstartup.service \
+    ${systemd_unitdir}/system/disablevim.service \
     /home/root/rockchip_test \
     /lib/firmware/rtl_bt \
 "
