@@ -61,8 +61,8 @@ sed -i 's/OnlyShowIn=GNOME;//g' etc/xdg/autostart/connman-applet.desktop
 rm -rf /usr/share/applications/chromium.desktop
 rm -rf /usr/share/applications/exo-web-browser.desktop
 
-cp -rf /home/root/rockchip_test/chromium.desktop /usr/share/applications/
-cp -rf /home/root/rockchip_test/exo-web-browser.desktop /usr/share/applications/
+#cp -rf /home/root/rockchip_test/chromium.desktop /usr/share/applications/
+#cp -rf /home/root/rockchip_test/exo-web-browser.desktop /usr/share/applications/
 
 
 if [ -x /usr/bin/startxfce4 ]; then
