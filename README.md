@@ -9,7 +9,7 @@
 | <img src="https://cdn.adlinktech.com/webupd/products/images/1790/LEC-PX30_A2_F.jpg" width="200"/> | **LEC-PX30** ([More details](https://www.adlinktech.com/Products/Computer_on_Modules/SMARC/LEC-PX30?lang=en))  <br />     SMARC Short Size Module with Rockchip PX30 Quad-Core ARM Cortex A35<br /> |
 
 <br />
-        |
+      
 
 **Note**: 
 
@@ -43,6 +43,10 @@
 | meta-python2         | dunfell        | 07dca1e54f82a06939df9b890c6d1ce1e3197f75 |
 
  
+**Known Issues**
+
+Camera sensor Not supported
+MPEG-4 Codec Not supported 
 
 
 <br>
