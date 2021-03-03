@@ -36,7 +36,6 @@
 
 <br>
 
-<br>
 
 
 #### Dunfell Branch details
@@ -46,9 +45,9 @@
 | Poky                 | dunfell        | e32d854e33bc86c2a616df8708e021a098afcf73 |
 | meta-openembedded    | dunfell        | f2d02cb71eaff8eb285a1997b30be52486c160ae |
 | meta-rockchip        | yocto-next     | 00b19d0a8856b64e979063cec6385c100e427f20 |
-| meta-adlink-rockchip | dunfell        | 00b19d0a8856b64e979063cec6385c100e427f20 |
+| meta-adlink-rockchip | dunfell        | 41032e5d578ea30eaf93cd5c651cf1e4486d4d50 |
 | meta-adlink-sema     | sema4.0        | 2151d926328742ff577afd055f15be0a6397a644 |
-| meta-python2         | dunfell        | 4400f9155ec193d028208cf0c66aeed2ba2b00ab |
+| meta-python2         | dunfell        | 07dca1e54f82a06939df9b890c6d1ce1e3197f75 |
 
  
 
