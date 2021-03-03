@@ -1,0 +1,25 @@
+From 762ccc2968281449b21cf5242b7b68a811594128 Mon Sep 17 00:00:00 2001
+From: Dinesh kumar <dineshkumar.varadarajan@adlinktech.com>
+Date: Sun, 9 Aug 2020 19:29:26 +0530
+Subject: [PATCH] Corrected UART Physical address
+
+---
+ src/arm/adlink_ipi.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/arm/adlink_ipi.c b/src/arm/adlink_ipi.c
+index af6f105b..acfd85e0 100644
+--- a/src/arm/adlink_ipi.c
++++ b/src/arm/adlink_ipi.c
+@@ -417,7 +417,7 @@ mraa_adlink_ipi()
+ */
+     int devnum;
+     for (devnum = 0; devnum < 2; devnum++) {
+-        if (mraa_link_targets(seriallink[devnum], "ff030000")) {
++        if (mraa_link_targets(seriallink[devnum], "ff160000")) {
+             uart0 = devnum;
+         }
+     }
+-- 
+2.17.1
+

@@ -1,0 +1,17 @@
+RK_MIRROR = "git://github.com/JeffyCN/mirrors"
+
+SRC_URI_pn-rockchip-alsa-config = "${RK_MIRROR};branch=alsa-config"
+SRC_URI_pn-gstreamer1.0-rockchip = "${RK_MIRROR};branch=gstreamer-rockchip"
+SRC_URI_pn-rockchip-libmali = "${RK_MIRROR};branch=libmali"
+SRC_URI_pn-rockchip-librga = "${RK_MIRROR};branch=linux-rga"
+SRC_URI_pn-rockchip-mpp = "${RK_MIRROR};branch=mpp"
+SRC_URI_pn-rk-binary-loader = "${RK_MIRROR};branch=rkbin"
+SRC_URI_pn-rk-binary-native = " \
+	${RK_MIRROR};branch=rkbin;name=rkbin \
+	${RK_MIRROR};branch=tools;name=tools;destsuffix=git/extra \
+"
+SRC_URI_pn-rockchip-rkisp = " \
+	${RK_MIRROR};branch=camera_engine_rkisp file://rkisp_daemons.sh \
+"
+SRC_URI_pn-rockchip-npu = "${RK_MIRROR};branch=rknpu-fw"
+SRC_URI_pn-rkwifibt-firmware = "${RK_MIRROR};branch=rkwifibt"

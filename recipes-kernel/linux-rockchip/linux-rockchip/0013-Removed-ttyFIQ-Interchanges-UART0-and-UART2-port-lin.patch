@@ -1,0 +1,117 @@
+From ee2201f77bef0b0266b2814d7763ae0742484615 Mon Sep 17 00:00:00 2001
+From: Dinesh kumar <dineshkumar.varadarajan@adlinktech.com>
+Date: Wed, 1 Jul 2020 14:50:15 +0530
+Subject: [PATCH 13/13] Removed ttyFIQ ,Interchanges UART0 and UART2 port lines
+
+---
+ arch/arm64/boot/dts/rockchip/lec-px30.dtsi           | 10 +++++-----
+ .../boot/dts/rockchip/px30-evb-ddr3-v10-linux.dts    | 12 ++++++------
+ arch/arm64/boot/dts/rockchip/rk3326-linux.dtsi       |  4 ++--
+ 3 files changed, 13 insertions(+), 13 deletions(-)
+
+diff --git a/arch/arm64/boot/dts/rockchip/lec-px30.dtsi b/arch/arm64/boot/dts/rockchip/lec-px30.dtsi
+index 708bc9cd419d..3157ca3fe8d7 100644
+--- a/arch/arm64/boot/dts/rockchip/lec-px30.dtsi
++++ b/arch/arm64/boot/dts/rockchip/lec-px30.dtsi
+@@ -30,9 +30,9 @@
+ 		i2c1 = &i2c1;
+ 		i2c2 = &i2c2;
+ 		i2c3 = &i2c3;
+-		serial0 = &uart0;
+-		serial1 = &uart1;
+ 		serial2 = &uart2;
++		serial1 = &uart1;
++		serial0 = &uart0;
+ 		serial3 = &uart3;
+ 		serial4 = &uart4;
+ 		serial5 = &uart5;
+@@ -475,7 +475,7 @@
+ 		};
+ 	};
+ 
+-	uart0: serial@ff030000 {
++	uart2: serial@ff030000 {
+ 		compatible = "rockchip,px30-uart", "snps,dw-apb-uart";
+ 		reg = <0x0 0xff030000 0x0 0x100>;
+ 		interrupts = <GIC_SPI 15 IRQ_TYPE_LEVEL_HIGH>;
+@@ -682,7 +682,7 @@
+ 		status = "disabled";
+ 	};
+ 
+-	uart2: serial@ff160000 {
++	uart0: serial@ff160000 {
+ 		compatible = "rockchip,px30-uart", "snps,dw-apb-uart";
+ 		reg = <0x0 0xff160000 0x0 0x100>;
+ 		interrupts = <GIC_SPI 17 IRQ_TYPE_LEVEL_HIGH>;
+@@ -693,7 +693,7 @@
+ 		dmas = <&dmac 4>, <&dmac 5>;
+ 		pinctrl-names = "default";
+ 		pinctrl-0 = <&uart2m0_xfer>;
+-		status = "disabled";
++		status = "okay";
+ 	};
+ 
+ 	uart3: serial@ff168000 {
+diff --git a/arch/arm64/boot/dts/rockchip/px30-evb-ddr3-v10-linux.dts b/arch/arm64/boot/dts/rockchip/px30-evb-ddr3-v10-linux.dts
+index b0d76eb80908..6c9d85e63499 100644
+--- a/arch/arm64/boot/dts/rockchip/px30-evb-ddr3-v10-linux.dts
++++ b/arch/arm64/boot/dts/rockchip/px30-evb-ddr3-v10-linux.dts
+@@ -1401,27 +1401,27 @@
+ 	pinctrl-names = "init", "default";
+ 	pinctrl-0 = <&tsadc_otp_gpio>;
+ 	pinctrl-1 = <&tsadc_otp_out>;
+-	status = "okay";
++	status = "okay";
+ };
+ 
+ /*change to uart0 debug*/
+-&uart0 {
++&uart2 {
+         pinctrl-names = "default";
+         pinctrl-0 = <&uart0_xfer /*&uart0_cts &uart0_rts*/>;
+-        status = "okay";
++        status = "disabled";
+ };
+ 
+ &uart1 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&uart1_xfer /*&uart1_cts &uart1_rts*/>;
+-	status = "okay";
++	status = "disabled";
+ };
+ 
+ /*uart2 debug change to uart2m1*/
+-&uart2 {
++&uart0 {
+         pinctrl-names = "default";
+         pinctrl-0 = <&uart2m1_xfer>;
+-        status = "disabled";
++        status = "okay";
+ };
+ 
+ &u2phy {
+diff --git a/arch/arm64/boot/dts/rockchip/rk3326-linux.dtsi b/arch/arm64/boot/dts/rockchip/rk3326-linux.dtsi
+index 4f2c27230b34..f24243b1a32f 100644
+--- a/arch/arm64/boot/dts/rockchip/rk3326-linux.dtsi
++++ b/arch/arm64/boot/dts/rockchip/rk3326-linux.dtsi
+@@ -45,7 +45,7 @@
+ 
+ 	chosen {
+  		//bootargs = "earlycon=uart8250,mmio32,0xff160000 swiotlb=1 console=ttyFIQ0 rw root=PARTUUID=614e0000-0000 rootwait";
+-		bootargs = "earlycon=uart8250,mmio32,0xff160000 swiotlb=1 console=ttyFIQ0 rw root=/dev/mmcblk0p4 rootwait";
++		bootargs = " rw root=/dev/mmcblk0p4 rootwait";
+ 	/*	 bootargs = "console=tty1 rw root=PARTUUID=614e0000-0000 rootwait";*/
+ 	};
+ 
+@@ -59,7 +59,7 @@
+ 		interrupts = <GIC_SPI 127 IRQ_TYPE_LEVEL_LOW>;
+ 		pinctrl-names = "default";
+ 		pinctrl-0 = <&uart2m1_xfer>;/*change to uart2m1*/
+-		status = "okay";
++		status = "disabled";
+ 	};
+ 
+ 	ramoops {
+-- 
+2.17.1
+

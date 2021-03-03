@@ -1,0 +1,25 @@
+From 80aab0f51fd05e5d35b3c5f7fd56da865243c5f9 Mon Sep 17 00:00:00 2001
+From: Dineshkumar V <dineshkumar.varadarajan@adlinktech.com>
+Date: Thu, 5 Dec 2019 11:30:39 +0530
+Subject: [PATCH] Fixed compilation error for xserver-xorg recipe
+
+---
+ glamor/glamor_core.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/glamor/glamor_core.c b/glamor/glamor_core.c
+index 4615005..32f78ee 100644
+--- a/glamor/glamor_core.c
++++ b/glamor/glamor_core.c
+@@ -135,7 +135,7 @@ glamor_prefer_gl(const char *func) {
+     return FALSE;
+ }
+ #else
+-Bool glamor_prefer_gl(const char *func) { TRUE; }
++Bool glamor_prefer_gl(const char *func) { return TRUE; }
+ #endif
+ 
+ static GCOps glamor_gc_ops = {
+-- 
+2.7.4
+

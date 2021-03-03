@@ -1,0 +1,117 @@
+#!/bin/sh
+
+# Restore alsa sound state
+alsactl restore 0 -f /var/lib/alsa/asound.state
+
+
+# Script to Update eth0 MAC address
+
+#delay
+sleep 5
+
+echo "Script started"
+
+f=`ethtool -e eth1 | grep 0x0000 | cut -d':' -f 2`
+
+f0=`echo $f | cut -d' ' -f 2`
+f1=`echo $f | cut -d' ' -f 3`
+f2=`echo $f | cut -d' ' -f 4`
+f3=`echo $f | cut -d' ' -f 5`
+f4=`echo $f | cut -d' ' -f 6`
+f5=`echo $f | cut -d' ' -f 7`
+
+f=`ethtool -e eth1 | grep 0x0040 | cut -d':' -f 2`
+
+e0=`echo $f | cut -d' ' -f 1`
+e1=`echo $f | cut -d' ' -f 2`
+e2=`echo $f | cut -d' ' -f 3`
+e3=`echo $f | cut -d' ' -f 4`
+e4=`echo $f | cut -d' ' -f 5`
+e5=`echo $f | cut -d' ' -f 6`
+
+echo $e0:$e1:$e2:$e3:$e4:$e5
+
+ifconfig eth0 down
+
+ifconfig eth0 hw ether $e0:$e1:$e2:$e3:$e4:$e5
+
+ifconfig eth0 up
+
+
+echo "eth0 mac updated"
+
+
+echo "[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Type=Application
+Name=Log Out
+Comment=Close down the machine safely
+Exec=/sbin/poweroff
+Icon=system-shutdown
+Terminal=false
+Categories=Utility;
+StartupNotify=XFCE;
+Categories=X-XFCE;X-Xfce-Toplevel;" > /usr/share/applications/xfce4-session-logout.desktop
+
+
+sed -i 's/OnlyShowIn=GNOME;//g' etc/xdg/autostart/connman-applet.desktop 
+
+#chromium
+rm -rf /usr/share/applications/chromium.desktop
+rm -rf /usr/share/applications/exo-web-browser.desktop
+
+cp -rf /home/root/rockchip_test/chromium.desktop /usr/share/applications/
+cp -rf /home/root/rockchip_test/exo-web-browser.desktop /usr/share/applications/
+
+
+if [ -x /usr/bin/startxfce4 ]; then
+     #removing unwanted applications
+   rm /usr/share/applications/xinput_calibrator.desktop
+fi 
+
+# Pulse audio configuration
+rm -rf /usr/lib/xfce4/panel/plugins/libpulseaudio-plugin.so
+cp -rf /home/root/rockchip_test/client.conf /etc/pulse/
+cp -rf /home/root/rockchip_test/pulse.conf /etc/dbus-1/system.d/
+cp -rf /home/root/rockchip_test/pulseaudio.service /etc/systemd/system/
+
+
+cat /etc/pulse/system.pa | grep -i auth
+if [ $? -ne 0 ]; then
+   sed -i 's/module-native-protocol-unix/module-native-protocol-unix auth-anonymous=1/g' /etc/pulse/system.pa
+fi
+
+systemctl --system stop pulseaudio.service
+
+systemctl --system disable pulseaudio.service
+
+systemctl --system enable pulseaudio.service
+
+systemctl --system start pulseaudio.service
+
+systemctl enable serial-getty@ttyGS0.service
+
+systemctl start serial-getty@ttyGS0.service
+
+#systemctl stop serial-getty@ttyS0.service
+
+#Load Pulse audio modules
+pactl load-module module-bluetooth-policy 
+
+pactl load-module module-bluetooth-discover
+
+
+#Load sema drivers
+
+modprobe adl_bmc
+modprobe adl_bmc_bklight
+modprobe adl_bmc_boardinfo
+modprobe adl_bmc_i2c
+modprobe adl_bmc_nvmem
+modprobe adl_bmc_wdt
+modprobe adl_bmc_hwmon
+modprobe adl_bmc_vm
+
+
+

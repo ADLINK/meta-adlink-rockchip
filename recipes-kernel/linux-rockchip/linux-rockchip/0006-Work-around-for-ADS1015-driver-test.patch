@@ -1,0 +1,108 @@
+From e5bc50fd32f9a3ce0973b62746e5e78652fb1350 Mon Sep 17 00:00:00 2001
+From: Dineshkumar V <dineshkumar.varadarajan@adlinktech.com>
+Date: Fri, 6 Dec 2019 16:22:57 +0530
+Subject: [PATCH 5/5] Work around for ADS1015 driver test
+
+---
+ .../boot/dts/rockchip/px30-evb-ddr3-v10-linux.dts  | 71 +++++++++++++++++++++-
+ 1 file changed, 70 insertions(+), 1 deletion(-)
+
+diff --git a/arch/arm64/boot/dts/rockchip/px30-evb-ddr3-v10-linux.dts b/arch/arm64/boot/dts/rockchip/px30-evb-ddr3-v10-linux.dts
+index cd98a4b..7bcfd2c 100644
+--- a/arch/arm64/boot/dts/rockchip/px30-evb-ddr3-v10-linux.dts
++++ b/arch/arm64/boot/dts/rockchip/px30-evb-ddr3-v10-linux.dts
+@@ -936,6 +936,74 @@
+ 		polarity = <0x0>;
+ 	};
+ 
++	ads1015@48{
++		compatible = "ti,ads1015";
++		reg = <0x48>;
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		channel@0 {
++			reg = <0>;
++			ti,gain = <0>;
++			ti,datarate = <6>;
++			};
++
++                channel@1 {
++                        reg = <1>;
++                        ti,gain = <0>;
++                        ti,datarate = <6>;
++                        };
++                channel@2 {
++                        reg = <2>;
++                        ti,gain = <0>;
++                        ti,datarate = <6>;
++                        };
++                channel@3 {
++                        reg = <3>;
++                        ti,gain = <0>;
++                        ti,datarate = <6>;
++                        };
++                channel@4 {
++                        reg = <4>;
++                        ti,gain = <0>;
++                        ti,datarate = <6>;
++                        };
++                channel@5 {
++                        reg = <5>;
++                        ti,gain = <0>;
++                        ti,datarate = <6>;
++                        };
++                channel@6 {
++                        reg = <6>;
++                        ti,gain = <0>;
++                        ti,datarate = <6>;
++                        };
++                channel@7 {
++                        reg = <7>;
++                        ti,gain = <0>;
++                        ti,datarate = <6>;
++                        };
++		};		
++
++
++/*	tlv320_codec: codec@18 {
++                        #sound-dai-cells = <0>;
++                        compatible = "ti,tlv320aic3x";
++                        reg = <0x18>;
++                        clocks = <&cru SCLK_I2S2_OUT>;
++                        clock-names = "mclk";
++                        pinctrl-names = "default";
++                        pinctrl-0 = <&i2s2_2ch_mclk>;
++                        ai31xx-micbias-vg=<2>;
++                        gpio-reset=<&gpio3 23 GPIO_ACTIVE_LOW>;
++                        AVDD-supply = <&sound_3v3>;
++                        IOVDD-supply = <&sound_1v8>;
++                        DRVDD-supply = <&sound_3v3>;
++                        DVDD-supply = <&sound_1v8>;
++                        status = "okay";
++                };
++	
++*/
+ 	rt5640: rt5640@1c {
+                 #sound-dai-cells = <0>;
+                 compatible = "realtek,rt5640";
+@@ -980,6 +1048,7 @@
+     6: 3300
+ */
+ 	/*/sys/devices/platform/ff190000.i2c/i2c-1/1-0048/in0_input*/
++/*
+ 	ads1115@48 {
+             compatible = "ti,ads1115";
+             reg = <0x48>;
+@@ -1028,7 +1097,7 @@
+     	    };   				
+             
+     	};
+-
++*/
+ 
+ };
+ 
+-- 
+2.7.4
+

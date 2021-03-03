@@ -1,0 +1,32 @@
+From e4f1b43088f557979647afbb63dd3318d38d3c64 Mon Sep 17 00:00:00 2001
+From: Dineshkumar V <dineshkumar.varadarajan@adlinktech.com>
+Date: Thu, 16 Apr 2020 15:44:48 +0530
+Subject: [PATCH 10/10] Kernel Restart Fix
+
+---
+ arch/arm64/kernel/process.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/arch/arm64/kernel/process.c b/arch/arm64/kernel/process.c
+index 34f7e40..34aa7b5 100644
+--- a/arch/arm64/kernel/process.c
++++ b/arch/arm64/kernel/process.c
+@@ -158,11 +158,15 @@ void machine_restart(char *cmd)
+ 	if (efi_enabled(EFI_RUNTIME_SERVICES))
+ 		efi_reboot(reboot_mode, NULL);
+ 
++#if 0
+ 	/* Now call the architecture specific reboot code. */
+ 	if (arm_pm_restart)
+ 		arm_pm_restart(reboot_mode, cmd);
+ 	else
+ 		do_kernel_restart(cmd);
++#endif
++
++	do_kernel_restart(cmd);
+ 
+ 	/*
+ 	 * Whoops - the architecture was unable to reboot.
+-- 
+2.7.4
+
