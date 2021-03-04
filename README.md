@@ -15,8 +15,8 @@
 | **PX30 Yocto BSP branch**                                    | **SD card image with xfce Desktop <br>(carrier board: IPi-SMARC)** | **Image size** |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | -------------- |
 | [dunfell](https://github.com/ADLINK/meta-adlink-rockchip/tree/dunfell) (kernel version: **4.4**)                           |   [download link](https://hq0epm0west0us0storage.blob.core.windows.net/$web/public/SMARC/LEC-PX30/Images/Yocto/LEC-PX30-IPi-SMARC_Yocto-dunfell-v1.0-20210404.zip)                                                           |       1.8GB         |
-| [zeus](https://github.com/ADLINK/meta-adlink-rockchip/tree/zeus) (kernel version: **4.4**) | [download link](https://hq0epm0west0us0storage.blob.core.windows.net/public/SMARC%2FLEC-PX30%2FImages%2FYocto%2FLEC-PX30-IPi-SMARC_Yocto-Zeus-v1.4_SD_20200514.zip) | 1.8GB          |
-| [thud](https://github.com/ADLINK/meta-adlink-rockchip/tree/thud) (kernel version: **4.4**) | [download link](https://hq0epm0west0us0storage.blob.core.windows.net/public/SMARC/LEC-PX30/Images/Yocto/LEC-PX30-IPi-SMARC_Yocto-thud-v1.0_SD_20200226.zip) | 1.7GB          |
+| [zeus](https://github.com/ADLINK/meta-adlink-rockchip/tree/zeus) (kernel version: **4.4**) | [download link](https://hq0epm0west0us0storage.blob.core.windows.net/$web/public/SMARC/LEC-PX30/Images/Yocto/LEC-PX30-IPi-SMARC_Yocto-Zeus-v2.4-20200909.zip) | 1.8GB          |
+| [thud](https://github.com/ADLINK/meta-adlink-rockchip/tree/thud) (kernel version: **4.4**) | [download link](https://hq0epm0west0us0storage.blob.core.windows.net/$web/public/SMARC/LEC-PX30/Images/Yocto/LEC-PX30-IPi-SMARC_Yocto-thud-v1.0-20200226.zip) | 1.7GB          |
 
 **Note**: 
 
