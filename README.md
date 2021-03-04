@@ -6,7 +6,7 @@
 
 |                         SMARC Module                         | Description                                                  | Yocto images                                                 |
 | :----------------------------------------------------------: | :----------------------------------------------------------- | ------------------------------------------------------------ |
-| <img src="https://cdn.adlinktech.com/webupd/products/images/1790/LEC-PX30_A2_F.jpg" width="200"/> | **LEC-PX30** ([More details](https://www.adlinktech.com/Products/Computer_on_Modules/SMARC/LEC-PX30?lang=en))  <br />     SMARC Short Size Module with <br />Rockchip PX30 Quad-Core ARM Cortex A35 | [click here](https://github.com/ADLINK/meta-adlink-rockchip/tree/thud#thud-branch-details)<br>With xfce desktop + MRAA/UPM<br>on I-Pi SMARC Carrier board <br>(Image size: 1.7 GB) |
+| <img src="https://cdn.adlinktech.com/webupd/products/images/1790/LEC-PX30_A2_F.jpg" width="200"/> | **LEC-PX30** ([More details](https://www.adlinktech.com/Products/Computer_on_Modules/SMARC/LEC-PX30?lang=en))  <br />     SMARC Short Size Module with <br />Rockchip PX30 Quad-Core ARM Cortex A35 | [click here](https://hq0epm0west0us0storage.blob.core.windows.net/public/SMARC/LEC-PX30/Images/Yocto/LEC-PX30-IPi-SMARC_Yocto-thud-v1.0_SD_20200226.zip)<br>With xfce desktop + MRAA/UPM<br>on I-Pi SMARC Carrier board <br>(Image size: 1.7 GB) |
 
 **Note**: 
 
