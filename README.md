@@ -45,8 +45,10 @@
  
 **Known Issues**
 
-Camera sensor Not supported
-MPEG-4 Codec Not supported 
+* Camera sensor Not supported and plan to fix by April
+
+* MPEG-4 Codec Not supported and plan to fix by April
+
 
 
 <br>
