@@ -16,7 +16,7 @@ QB_MEM = '${@bb.utils.contains("DISTRO_FEATURES", "opengl", "-m 512", "-m 256", 
 QB_MEM_qemumips = "-m 256"
 
 
-IMAGE_INSTALL += " garcon xterm xclock twm xinit-env xserver-xorg mesa-demos glmark2 haveged adlinkspitool "
+IMAGE_INSTALL += " garcon xterm xclock twm xinit-env xserver-xorg mesa-demos glmark2 haveged adlinkspitool epiphany "
 
 IMAGE_INSTALL_append = " packagegroup-base packagegroup-core-full-cmdline usbutils i2c-tools can-utils alsa-utils lmsensors-sensors dhcp-server dhcp-client pkgconfig connman-gnome startupconfig cmake packagegroup-core-buildessential vim python3-upm upm upm-dev python3-mraa mraa-utils mraa-dev mraa-doc mraa minicom git inetutils iw bluez5 kernel-devsrc sema4.0 matchbox-panel matchbox-config-gtk matchbox-desktop matchbox-session matchbox-session-sato matchbox-theme-sato matchbox-wm packagegroup-tools-bluetooth gnome-bluetooth blueman "
 
