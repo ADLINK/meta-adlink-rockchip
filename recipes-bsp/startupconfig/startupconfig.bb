@@ -6,6 +6,9 @@ LICENSE = "CLOSED"
 SRC_URI = "\
     file://adlinkstartup \
     file://adlinkstartup.service \
+    file://disablevim.service \
+    file://disablemailreader.service \
+    file://disablemenulibre.service \
     file://rockchip_test \
     file://rtl_bt \
 "
@@ -13,7 +16,7 @@ SRC_URI = "\
 inherit pkgconfig systemd 
 
 SYSTEMD_PACKAGES += "${PN}"
-SYSTEMD_SERVICE_${PN} = "adlinkstartup.service"
+SYSTEMD_SERVICE_${PN} = "adlinkstartup.service disablevim.service disablemailreader.service disablemenulibre.service"
 SYSTEMD_AUTO_ENABLE_${PN} = "enable"
 
 INITSCRIPT_NAME = "adlinkstartup"
@@ -36,14 +39,15 @@ do_install() {
        install -m 0755 "${WORKDIR}/rockchip_test/pulse.conf" "${D}/home/root/rockchip_test/"
        install -m 0755 "${WORKDIR}/rockchip_test/pulseaudio.service" "${D}/home/root/rockchip_test/"
        install -m 0755 "${WORKDIR}/rockchip_test/wifi_test.sh" "${D}/home/root/rockchip_test/"
-       install -m 0755 "${WORKDIR}/rockchip_test/chromium.desktop" "${D}/home/root/rockchip_test/"
-       install -m 0755 "${WORKDIR}/rockchip_test/exo-web-browser.desktop" "${D}/home/root/rockchip_test/"
        
        install -d "${D}${sbindir}"
        install -m 0755 "${WORKDIR}/adlinkstartup" "${D}${sbindir}/adlinkstartup"
 
        install -d "${D}${systemd_unitdir}/system"
        install -m 0644 "${WORKDIR}/adlinkstartup.service" "${D}${systemd_unitdir}/system/adlinkstartup.service"
+       install -m 0644 "${WORKDIR}/disablevim.service" "${D}${systemd_unitdir}/system/disablevim.service"
+       install -m 0644 "${WORKDIR}/disablemailreader.service" "${D}${systemd_unitdir}/system/disablemailreader.service"
+       install -m 0644 "${WORKDIR}/disablemenulibre.service" "${D}${systemd_unitdir}/system/disablemenulibre.service"
 
        install -d "${D}/lib/firmware/rtl_bt"
        install -m 0755 "${WORKDIR}/rtl_bt/rtl8723b_config" "${D}/lib/firmware/rtl_bt/"
@@ -57,6 +61,9 @@ do_install() {
 FILES_${PN} += "\
     ${systemd_unitdir}/system-preset \
     ${systemd_unitdir}/system/adlinkstartup.service \
+    ${systemd_unitdir}/system/disablevim.service \
+    ${systemd_unitdir}/system/disablemailreader.service \
+    ${systemd_unitdir}/system/disablemenulibre.service \
     /home/root/rockchip_test \
     /lib/firmware/rtl_bt \
 "

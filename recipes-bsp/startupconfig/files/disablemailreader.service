@@ -1,0 +1,10 @@
+[Unit]
+Description=Remove mail reader desktop icon
+
+[Service]
+Type=simple
+ExecStart=/bin/sh -c 'rm -f /usr/share/applications/exo-mail-reader.desktop'
+
+[Install]
+WantedBy=multi-user.target
+

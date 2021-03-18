@@ -1,0 +1,27 @@
+From 5fb2225ecc2502353e6eae1b9b58b16bbc8b50db Mon Sep 17 00:00:00 2001
+From: Dineshkumar V <dineshkumar.varadarajan@adlinktech.com>
+Date: Tue, 9 Mar 2021 15:48:09 +0530
+Subject: [PATCH] Fix MPEG4 video playback Issue
+
+Signed-off-by: Dineshkumar V <dineshkumar.varadarajan@adlinktech.com>
+---
+ mpp/codec/dec/mpg4/mpg4d_api.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/mpp/codec/dec/mpg4/mpg4d_api.c b/mpp/codec/dec/mpg4/mpg4d_api.c
+index 6a910e918f69..5efeadc947af 100644
+--- a/mpp/codec/dec/mpg4/mpg4d_api.c
++++ b/mpp/codec/dec/mpg4/mpg4d_api.c
+@@ -90,7 +90,8 @@ static MPP_RET mpg4d_init(void *dec, ParserCfg *cfg)
+     p->frame_slots  = cfg->frame_slots;
+     p->packet_slots = cfg->packet_slots;
+     p->task_count   = 2;
+-    p->need_split   = 1;//cfg->need_split;
++    //p->need_split   = 1;//cfg->need_split;
++    p->need_split   = cfg->cfg->base.split_parse;
+     p->internal_pts = cfg->cfg->base.internal_pts;
+     p->stream       = stream;
+     p->stream_size  = stream_size;
+-- 
+2.17.1
+
