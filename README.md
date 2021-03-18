@@ -37,7 +37,7 @@
 | Poky                 | dunfell        | e32d854e33bc86c2a616df8708e021a098afcf73 |
 | meta-openembedded    | dunfell        | f2d02cb71eaff8eb285a1997b30be52486c160ae |
 | meta-rockchip        | yocto-next     | 00b19d0a8856b64e979063cec6385c100e427f20 |
-| meta-adlink-rockchip | dunfell        | 7fdf8f9e7a9bf4b40380e834c434e672c1ac28bd |
+| meta-adlink-rockchip | dunfell        | 118e6c6770e82faf7eedb40f617f936a9c1b6f21 |
 | meta-adlink-sema     | sema4.0        | 4aaa1081ea64b7258f0ce94dd307085c60ebc29d |
 | meta-python2         | dunfell        | 07dca1e54f82a06939df9b890c6d1ce1e3197f75 |
 
