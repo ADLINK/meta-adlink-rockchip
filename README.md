@@ -42,10 +42,6 @@
 | meta-python2         | dunfell        | 07dca1e54f82a06939df9b890c6d1ce1e3197f75 |
 
  
-**Known Issues**
-
-* Camera sensor Not supported and plan to fix by April
-
 
 <br>
 
