@@ -39,6 +39,7 @@ do_install() {
        install -m 0755 "${WORKDIR}/rockchip_test/pulse.conf" "${D}/home/root/rockchip_test/"
        install -m 0755 "${WORKDIR}/rockchip_test/pulseaudio.service" "${D}/home/root/rockchip_test/"
        install -m 0755 "${WORKDIR}/rockchip_test/wifi_test.sh" "${D}/home/root/rockchip_test/"
+       install -m 0755 "${WORKDIR}/rockchip_test/exo-web-browser.desktop" "${D}/home/root/rockchip_test/"
        
        install -d "${D}${sbindir}"
        install -m 0755 "${WORKDIR}/adlinkstartup" "${D}${sbindir}/adlinkstartup"
